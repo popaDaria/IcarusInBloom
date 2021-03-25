@@ -11,7 +11,7 @@ Android project - Organizational app for plant owners
 
 ## _MOTIVATION_
 
-  Are there apps like this already? Yes, most probably. But, being the broke college student that I am, paying 5$ for an app like that seems to much so I am making my own.
+  Are there apps like this already? Yes, most probably. But, being the broke college student that I am, paying 5$ for an app like that seems too much so I am making my own.
   
   Also, plants:
   - [x] cute
