@@ -3,6 +3,8 @@ Android project - Organizational app for plant owners
 
 ## _DESCRIPTION_
 
+![Flowmap](flowmap.png "Flowmap")
+
   "Icarus in Bloom" is a project for an Android app whose **main purpose** is helping plant owners better track the plants they have and their needs. 
   
  The app is meant to have a couple of useful functionalities, such as: a main view of all your plants (including pics, name, and a small description), another view where you can check which plants need watering / change of soil / etc., and _maybe_ a forum with discussions from more plant owners.   
