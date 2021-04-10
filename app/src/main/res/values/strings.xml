@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">IcarusInBloom</string>
+    <string name="app_name">Icarus In Bloom</string>
+    <string name="tab_text_1">Home</string>
+    <string name="tab_text_2">Plants</string>
+    <string name="tab_text_3">Message</string>
+    <string name="generic_plant_info">This is my plant. It is the best plant c:</string>
 </resources>

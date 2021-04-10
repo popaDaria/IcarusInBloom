@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainAddLayout"
+    tools:context=".AddActivity"
+    android:background="@color/baby_blue"
+    android:elevation="8dp">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/bgImagePlant"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="410dp"
+        android:layout_height="508dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-1dp"
+        android:background="@drawable/border_rectangle"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="227dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Add a new plant companion"
+            android:textColor="@color/accent_dark"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:shadowColor="@color/accent_dark"
+            android:shadowDx="1"
+            android:shadowRadius="3"/>
+
+
+        <EditText
+            android:id="@+id/plantNameEdit"
+            android:layout_width="227dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="92dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Name"
+            android:textColor="@color/accent_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            android:shadowColor="@color/accent_dark"
+            android:shadowDx="1"
+            android:shadowRadius="2"
+            android:textAllCaps="true"/>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="92dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Plant Info"
+            android:textColor="@color/accent_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            android:shadowColor="@color/accent_dark"
+            android:shadowDx="1"
+            android:shadowRadius="2"
+            android:textAllCaps="true"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="92dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:shadowColor="@color/accent_dark"
+            android:shadowDx="1"
+            android:shadowRadius="2"
+            android:text="Plant species"
+            android:textAllCaps="true"
+            android:textColor="@color/accent_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="92dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:shadowColor="@color/accent_dark"
+            android:shadowDx="1"
+            android:shadowRadius="2"
+            android:text="Plant Bday"
+            android:textAllCaps="true"
+            android:textColor="@color/accent_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/plantSpeciesEdit"
+            android:layout_width="227dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/plantInfoEdit" />
+
+        <EditText
+            android:id="@+id/plantInfoEdit"
+            android:layout_width="227dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/plantNameEdit" />
+
+        <TextView
+            android:id="@+id/saveChangesAdd"
+            android:layout_width="120dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:text="Save changes"
+            android:textColor="@color/accent_dark"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.889"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="96dp"
+            android:layout_height="90dp"
+
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/plant" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="400dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/addPlantImageView"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+
+            android:background="@color/light_orange"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/addPlantImageButton"
+            android:layout_width="100dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="76dp"
+            android:backgroundTint="@color/baby_blue"
+            android:text="Select image"
+            android:textColor="@color/accent_dark"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantSpeciesEdit" />
+
+        <EditText
+            android:id="@+id/plantBdayEdit"
+            android:layout_width="227dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/plantSpeciesEdit" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

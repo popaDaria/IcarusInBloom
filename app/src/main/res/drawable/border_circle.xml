@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- View background color -->
+    <solid
+        android:color="@color/light_orange" >
+    </solid>
+
+    <!-- View border color and width -->
+    <stroke
+        android:width="25dp"
+        android:color="@color/darker_orange" >
+    </stroke>
+
+    <corners
+        android:radius="15dp"   >
+    </corners>
+</shape>
