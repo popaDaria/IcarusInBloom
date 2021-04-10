@@ -16,12 +16,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-@Entity(tableName = "Plants",foreignKeys = {
+/*,foreignKeys = {
         @ForeignKey(entity = User.class,
         parentColumns = "id",
         childColumns = "ownerId",
         onDelete = ForeignKey.CASCADE,
         onUpdate = ForeignKey.CASCADE)})
+
+ */
+@Entity(tableName = "Plants")
 public class PlantItem implements Serializable {
 
     @PrimaryKey(autoGenerate = true)

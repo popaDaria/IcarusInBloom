@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.sunny.icarusinbloom.login.User;
 import com.sunny.icarusinbloom.recycler.PlantItem;
 
-@Database(entities = {User.class}, version = 3)
+@Database(entities = {User.class}, version = 4)
 public abstract class UsersDB extends RoomDatabase {
 
     private static UsersDB instance;
@@ -19,7 +19,7 @@ public abstract class UsersDB extends RoomDatabase {
     public static synchronized UsersDB getInstance(Context context){
         if(instance == null) {
             instance = Room.databaseBuilder(context,
-                    UsersDB.class, "Users_db")
+                    UsersDB.class, "Users_DB")
                     .fallbackToDestructiveMigration()
                     .build();
         }

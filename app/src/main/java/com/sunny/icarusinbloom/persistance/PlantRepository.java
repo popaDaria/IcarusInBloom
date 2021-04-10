@@ -23,7 +23,7 @@ public class PlantRepository {
         PlantDB db = PlantDB.getInstance(application);
         plantDao = db.plantDao();
         allPlants = plantDao.getAllPlants();
-        executorService = Executors.newFixedThreadPool(1);
+        executorService = Executors.newFixedThreadPool(2);
     }
 
     public static synchronized PlantRepository getInstance(Application application){

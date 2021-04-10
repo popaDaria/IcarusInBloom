@@ -33,11 +33,11 @@ public interface UserDao {
     @Query("SELECT id from Users where email=:email")
     LiveData<Integer> getUserId(String email);
 
-    @Transaction
+/*    @Transaction
     @Query("SELECT * FROM Users")
     List<UserWithPlants> getAllUsersAndPlants();
 
     @Transaction
     @Query("SELECT * FROM Users WHERE id = :userId")
-    List<UserWithPlants> getUserAndPlants(int userId);
+    List<UserWithPlants> getUserAndPlants(int userId);*/
 }
