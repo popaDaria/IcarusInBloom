@@ -33,7 +33,9 @@ public class PlantRepository {
     }
 
     public void insert(PlantItem item){
-        executorService.execute(()-> plantDao.insert(item));
+        executorService.execute(()-> {
+            plantDao.insert(item);
+        });
     }
 
     public LiveData<List<PlantItem>> getAllPlants(){
@@ -43,4 +45,9 @@ public class PlantRepository {
     public LiveData<PlantItem> getPlant(int id){
         return plantDao.getPlant(id);
     }
+
+    public LiveData<List<PlantItem>> getAllUserPlant(int userId){
+        return plantDao.getAllUserPlant(userId);
+    }
+
 }

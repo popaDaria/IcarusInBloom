@@ -55,14 +55,18 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewModel = new ViewModelProvider(this).get(PlantItemViewModel.class);
 
-
-        //viewModel1 = new ViewModelProvider(this).get(UserViewModel.class);
-
-        viewModel.getPlantList().observe(getViewLifecycleOwner(),plants->{
+        viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
             if(plants!=null){
+                for (PlantItem p:plants) {
+                    System.out.println(p.toString());
+                }
                 list=plants;
+                adapter.setPlants(list);
+                adapter.notifyDataSetChanged();
             }
         });
+
+        System.out.println("after the observe method");
         adapter = new PlantItemAdapter(list,this);
 
         recyclerView.setAdapter(adapter);
@@ -108,13 +112,13 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                 //adapter.notifyDataSetChanged();
             }
         }
-        viewModel.getPlantList().observe(this,plants->{
+        viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(this,plants->{
             if(plants != null){
                 for (PlantItem p:plants) {
                     System.out.println("HIIII "+p.toString());
                 }
                 list=plants;
-                //adapter.setPlants(list);
+                adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
             }
         });

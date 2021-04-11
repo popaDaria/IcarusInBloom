@@ -42,7 +42,7 @@ public class AddActivity extends AppCompatActivity {
     private int revealY;
     private User user;
     private int userId;
-    private UserViewModel userViewModel;
+    //private UserViewModel userViewModel;
     PlantItem toAdd;
 
     @Override
@@ -50,7 +50,7 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+       // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         final Intent intent1 = getIntent();
         rootLayout = findViewById(R.id.mainAddLayout);
@@ -61,6 +61,12 @@ public class AddActivity extends AppCompatActivity {
             revealX = intent1.getIntExtra(EXTRA_CIRCULAR_REVEAL_X,0);
             revealY = intent1.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y,0);
             user = (User) intent1.getExtras().getSerializable("loggedUser");
+
+/*            userViewModel.getUserId(user.getEmail()).observe(this, x->{
+                if(x!=null){
+                    userId = x;
+                }
+            });*/
 
             ViewTreeObserver viewTreeObserver = rootLayout.getViewTreeObserver();
             if(viewTreeObserver.isAlive()){
@@ -109,18 +115,13 @@ public class AddActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "please input a name & species", Toast.LENGTH_SHORT);
                 toast.show();
             }else {
-                userViewModel.getUserId(user.getEmail()).observe(this, x->{
-                   if(x!=null){
-                       userId = x;
-                       toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,userId);
-                       Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
-                       toast.show();
-                       System.out.println(toAdd.toString());
-                       Intent intent = new Intent();
-                       intent.putExtra("plantAdded", toAdd);
-                       setResult(RESULT_OK, intent);
-                   }
-                });
+                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId());
+                Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
+                toast.show();
+                System.out.println(toAdd.toString());
+                Intent intent = new Intent();
+                intent.putExtra("plantAdded", toAdd);
+                setResult(RESULT_OK, intent);
             }
             finish();
 

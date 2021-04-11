@@ -31,4 +31,7 @@ public interface PlantDao {
     @Query("SELECT * FROM Plants WHERE plantId= :id")
     LiveData<PlantItem> getPlant(int id);
 
+    @Query("SELECT * FROM Plants WHERE ownerId= :userId")
+    LiveData<List<PlantItem>> getAllUserPlant(int userId);
+
 }

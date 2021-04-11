@@ -60,6 +60,10 @@ public class PlantItemViewModel extends AndroidViewModel {
     public LiveData<PlantItem> getPlant(int id){
         return repository.getPlant(id);
     }
+    public LiveData<List<PlantItem>> getAllUserPlant(int userId){
+        return repository.getAllUserPlant(userId);
+    }
+
 
    /* public void setPlantList(List<PlantItem> plantList) {
         this.plantList.setValue(plantList);
