@@ -76,13 +76,13 @@ public class PlantItemAdapter extends RecyclerView.Adapter<PlantItemAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listItemClick.onClick(getAdapterPosition());
+                    listItemClick.onClick(plants.get(getAdapterPosition()));
                 }
             });
         }
     }
 
     public interface OnListItemClick{
-        void onClick(int position);
+        void onClick(PlantItem plantItem);
     }
 }

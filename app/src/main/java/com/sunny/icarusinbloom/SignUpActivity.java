@@ -22,6 +22,7 @@ public class SignUpActivity extends AppCompatActivity {
     String userLastName = "null";
     String userBday = "null";
     boolean uniqueEmail = true;
+    public static User signedUpUser;
 
     private UserViewModel userViewModel;
 
@@ -74,9 +75,22 @@ public class SignUpActivity extends AppCompatActivity {
                     User user = new User(userFirstName, userLastName, userPassword, userEmail, userBday);
                     userViewModel.insert(user);
 
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra("NewLoggedUser", user);
-                    startActivity(intent);
+                    userViewModel.getAllUsers().observe(this,users->{
+                        if(!users.isEmpty()){
+                            for (User u:users) {
+                                if(u.getEmail().equals(user.getEmail())){
+                                    // System.out.println(u.toString());
+                                    signedUpUser = u;
+                                    LogInActivity.loggedUser=null;
+                                    Intent intent = new Intent(this, MainActivity.class);
+                                    //intent.putExtra("NewLoggedUser", user);
+                                    startActivity(intent);
+                                    break;
+                                }
+                            }
+                        }
+                    });
+
                 }else{
                     Toast toast = Toast.makeText(this, "an account with this email already exists", Toast.LENGTH_SHORT);
                     toast.show();

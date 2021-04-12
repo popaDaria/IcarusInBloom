@@ -16,7 +16,9 @@
         app:cardCornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/darker_orange"/>
+        android:backgroundTint="@color/darker_orange">
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="95dp"
@@ -40,7 +42,7 @@
         android:id="@+id/title_header"
         android:layout_width="170dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="96dp"
         android:gravity="center"
         android:shadowColor="@color/accent_dark"
         android:shadowDx="2"
@@ -51,7 +53,24 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/baby_blue">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title=""/>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

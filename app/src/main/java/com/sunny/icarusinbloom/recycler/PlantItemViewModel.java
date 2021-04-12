@@ -51,10 +51,8 @@ public class PlantItemViewModel extends AndroidViewModel {
         plantList.setValue(list);*/
     }
 
-    public void deletePlant(int position){
-       /* ArrayList<PlantItem> list = plantList.getValue();
-        list.remove(position);
-        plantList.setValue(list);*/
+    public void deletePlant(PlantItem item){
+        repository.delete(item);
     }
 
     public LiveData<PlantItem> getPlant(int id){

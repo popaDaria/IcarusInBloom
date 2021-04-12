@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:paddingHorizontal="45dp"
+    android:paddingVertical="180dp"
+    android:id="@+id/frameLayout"
+    android:onClick="exitView"
+    tools:context=".PlantInfoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="350dp"
+        android:background="@drawable/view_shadow">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/plantImageInfoView"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:background="@color/light_orange"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/deletePlant"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="304dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:padding="0sp"
+            android:text="Delete"
+            android:onClick="deletePlant"
+            android:textColor="@color/accent_dark"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.846"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/goBackToFragment"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:padding="0sp"
+            android:text="Back"
+            android:textColor="@color/accent_dark"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/plantInfoViewTitle"
+            android:layout_width="137dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="36dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/plantInfoViewInfo"
+            android:layout_width="234dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <TextView
+            android:id="@+id/plantInfoViewExtra"
+            android:layout_width="234dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantInfoViewBday" />
+
+        <TextView
+            android:id="@+id/plantInfoViewSpecies"
+            android:layout_width="234dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantInfoViewInfo" />
+
+        <TextView
+            android:id="@+id/plantInfoViewBday"
+            android:layout_width="234dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantInfoViewSpecies" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

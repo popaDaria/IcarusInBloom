@@ -105,18 +105,24 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                 super.onActivityResult(requestCode, resultCode, data);
                 Bundle bundle = data.getExtras();
                 PlantItem added = (PlantItem) bundle.getSerializable("plantAdded");
-                //System.out.println("GOT TO THE FRAGMENT");
                 viewModel.addPlant(added);
                 /*Toast toast = Toast.makeText(getContext(),"info received:"+ added.toString(),Toast.LENGTH_LONG);
                 toast.show();*/
                 //adapter.notifyDataSetChanged();
             }
+        }else if(requestCode==3){
+            if(resultCode==RESULT_OK){
+                super.onActivityResult(requestCode,resultCode,data);
+                Bundle bundle = data.getExtras();
+                PlantItem toDelete = (PlantItem) bundle.getSerializable("deletePlant");
+                viewModel.deletePlant(toDelete);
+            }
         }
         viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(this,plants->{
             if(plants != null){
-                for (PlantItem p:plants) {
+               /* for (PlantItem p:plants) {
                     System.out.println("HIIII "+p.toString());
-                }
+                }*/
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
@@ -125,9 +131,13 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     }
 
     @Override
-    public void onClick(int position) {
-        Toast toast = Toast.makeText(getActivity(),"hi "+position,Toast.LENGTH_SHORT);
-        toast.show();
+    public void onClick(PlantItem plantItem) {
+/*        Toast toast = Toast.makeText(getActivity(),"hi "+plantItem.toString(),Toast.LENGTH_SHORT);
+        toast.show();*/
+        Intent intent = new Intent(getContext(), PlantInfoActivity.class);
+        intent.putExtra("plant", plantItem);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivityForResult(intent,3);
     }
 
 }

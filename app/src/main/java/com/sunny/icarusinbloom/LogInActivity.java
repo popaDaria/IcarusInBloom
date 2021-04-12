@@ -1,6 +1,7 @@
 package com.sunny.icarusinbloom;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,9 @@ public class LogInActivity extends AppCompatActivity {
     private String userEmail =null;
     private String userPassword=null;
     private UserViewModel userViewModel;
+    private EditText email;
+    private EditText password;
+    public static User loggedUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +32,26 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.log_in);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        email = findViewById(R.id.userEmailLogin);
+        password = findViewById(R.id.userPasswordLogin);
 
+        SharedPreferences prefs = getSharedPreferences("MyPrefs",MODE_PRIVATE);
+        userEmail = prefs.getString("userEmail","");
+        if(userEmail!=null)
+            email.setText(userEmail);
+        userPassword = prefs.getString("userPassword","");
+        if(userPassword!=null)
+            password.setText(userPassword);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("userEmail", email.getText().toString());
+        editor.putString("userPassword",password.getText().toString());
+        editor.apply();
     }
 
     public void goToSignUp(View view) {
@@ -37,8 +60,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        EditText email = findViewById(R.id.userEmailLogin);
-        EditText password = findViewById(R.id.userPasswordLogin);
+
         if(!email.getText().toString().isEmpty())
             userEmail=email.getText().toString();
         if(!password.getText().toString().isEmpty())
@@ -54,8 +76,9 @@ public class LogInActivity extends AppCompatActivity {
                     if (u.getEmail().equals(userEmail) && u.getPassword().equals(userPassword)) {
                         //System.out.println(u.toString());
                         found=true;
+                        loggedUser=u;
                         Intent intent = new Intent(this, MainActivity.class);
-                        intent.putExtra("LoggedUser", u);
+                        //intent.putExtra("LoggedUser", u);
                         startActivity(intent);
                         break;
                     }
@@ -64,6 +87,9 @@ public class LogInActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(this, "incorrect email or password", Toast.LENGTH_SHORT);
                     toast.show();
                 }
+            }else{
+                Toast toast = Toast.makeText(this, "no user accounts found. please create a new one first", Toast.LENGTH_SHORT);
+                toast.show();
             }
             });
         }else {

@@ -50,4 +50,10 @@ public class PlantRepository {
         return plantDao.getAllUserPlant(userId);
     }
 
+    public void delete(PlantItem item){
+        executorService.execute(()->{
+            plantDao.delete(item);
+        });
+    }
+
 }

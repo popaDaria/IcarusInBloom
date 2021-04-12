@@ -24,8 +24,10 @@
             android:theme="@style/AppTheme"/>
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme">
-
         </activity>
+        <activity android:name=".PlantInfoActivity"
+            android:theme="@style/Theme.Transparent"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>
