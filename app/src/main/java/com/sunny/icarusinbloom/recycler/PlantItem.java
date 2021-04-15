@@ -29,20 +29,52 @@ public class PlantItem implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int plantId;
+    private int speciesId;
+    private int ownerId;
+
     private String name;
     private String info;
     private String species;
     private String image;
     private String bday;
-    private int ownerId;
+    private String water_type;
+    private int water_interval;
 
-    public PlantItem(String name, String info, String species, String image, String bday, int ownerId) {
+    public PlantItem(String name, String info, String species, String image, String bday, int ownerId,
+                     int speciesId, int water_interval, String water_type) {
         this.name = name;
         this.info = info;
         this.species = species;
         this.image = image;
         this.bday=bday;
         this.ownerId=ownerId;
+        this.speciesId=speciesId;
+        this.water_interval=water_interval;
+        this.water_type=water_type;
+    }
+
+    public int getSpeciesId() {
+        return speciesId;
+    }
+
+    public void setSpeciesId(int speciesId) {
+        this.speciesId = speciesId;
+    }
+
+    public String getWater_type() {
+        return water_type;
+    }
+
+    public void setWater_type(String water_type) {
+        this.water_type = water_type;
+    }
+
+    public int getWater_interval() {
+        return water_interval;
+    }
+
+    public void setWater_interval(int water_interval) {
+        this.water_interval = water_interval;
     }
 
     public int getPlantId() {
@@ -105,12 +137,15 @@ public class PlantItem implements Serializable {
     public String toString() {
         return "PlantItem{" +
                 "plantId=" + plantId +
+                ", speciesId=" + speciesId +
+                ", ownerId=" + ownerId +
                 ", name='" + name + '\'' +
                 ", info='" + info + '\'' +
                 ", species='" + species + '\'' +
                 ", image='" + image + '\'' +
                 ", bday='" + bday + '\'' +
-                ", ownerId=" + ownerId +
+                ", water_type='" + water_type + '\'' +
+                ", water_interval=" + water_interval +
                 '}';
     }
 }

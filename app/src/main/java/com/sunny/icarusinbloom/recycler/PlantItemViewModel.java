@@ -20,35 +20,15 @@ public class PlantItemViewModel extends AndroidViewModel {
     public PlantItemViewModel(Application application){
             super(application);
             repository = PlantRepository.getInstance(application);
-
-/*          plantList = new MutableLiveData<>();
-            ArrayList<PlantItem> list = new ArrayList<>();
-            PlantItem p1 = new PlantItem("Bobby", "null", "rose","null","null",1);
-            list.add(p1);
-            list.add(p1);
-            PlantItem p2 = new PlantItem("Joanne", "Dhsfhsgdjds", "delilah","null","null",1);
-            list.add(p2);
-            list.add(p2);
-            list.add(p2);
-            list.add(p2);
-            list.add(p2);
-            list.add(p2);
-            plantList.setValue(list);*/
     }
 
 
     public LiveData<List<PlantItem>> getPlantList() {
         return repository.getAllPlants();
-        /*      LiveData<List<PlantItem>> list = repository.getAllPlants();
-        setPlantList(list.getValue());
-        return plantList;*/
     }
 
     public void addPlant(PlantItem plantItem){
         repository.insert(plantItem);
-        /*        List<PlantItem> list = plantList.getValue();
-        list.add(plantItem);
-        plantList.setValue(list);*/
     }
 
     public void deletePlant(PlantItem item){
@@ -61,10 +41,5 @@ public class PlantItemViewModel extends AndroidViewModel {
     public LiveData<List<PlantItem>> getAllUserPlant(int userId){
         return repository.getAllUserPlant(userId);
     }
-
-
-   /* public void setPlantList(List<PlantItem> plantList) {
-        this.plantList.setValue(plantList);
-    }*/
 
 }

@@ -66,7 +66,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
             }
         });
 
-        System.out.println("after the observe method");
         adapter = new PlantItemAdapter(list,this);
 
         recyclerView.setAdapter(adapter);

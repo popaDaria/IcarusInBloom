@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+            app:key="mails"
+            app:title="Enable Mail notifications"
+            />
+
+    <Preference
+            app:key="feedback"
+            app:summary="Please report any issues or possible new features here"
+            app:title="Send feedback"/>
+
+    <MultiSelectListPreference
+        app:title="Select profile pic"
+        app:key="pfp"
+        />
+
+    </PreferenceScreen>

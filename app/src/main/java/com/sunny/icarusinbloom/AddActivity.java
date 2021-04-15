@@ -115,7 +115,8 @@ public class AddActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "please input a name & species", Toast.LENGTH_SHORT);
                 toast.show();
             }else {
-                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId());
+                //TODO: search for species id, get the species info, set it into the plant class and insert into Species db
+                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),-1,-1,"null");
                 Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
                 toast.show();
                 System.out.println(toAdd.toString());
