@@ -44,6 +44,8 @@ public class AddActivity extends AppCompatActivity {
     String plantUri = "null";
     String plantBday = "null";
     int speciesId = -1;
+    int water_interval=3;
+    String water_type="normal";
 
     public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
     public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
@@ -134,9 +136,9 @@ public class AddActivity extends AppCompatActivity {
             }else {
                 //TODO: search for species id, get the species info, set it into the plant class and insert into Species db
                 setSpecies(rootLayout);
-                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),speciesId,-1,"null");
-                Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
-                toast.show();
+                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),speciesId,water_interval,water_type);
+                //Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
+                //toast.show();
                 System.out.println(toAdd.toString());
                 Intent intent = new Intent();
                 intent.putExtra("plantAdded", toAdd);
@@ -216,6 +218,7 @@ public class AddActivity extends AppCompatActivity {
                 public void onResponse(Call<SpeciesResponse> call, Response<SpeciesResponse> response) {
                     if(response.code()==200){
                         speciesInfo = response.body().getPlantInfo();
+                        calculateWaterNeed(speciesInfo);
                         System.out.println(speciesInfo.toString());
                         Log.i("Species Info",speciesInfo.toString());
                     }else{
@@ -229,8 +232,37 @@ public class AddActivity extends AppCompatActivity {
                     System.out.println("GETTING INFO FAILURE");
                 }
             });
+        }else{
+            water_interval=3;
+            water_type="normal";
         }
         warning.setVisibility(View.INVISIBLE);
         button.setVisibility(View.VISIBLE);
+    }
+
+    private void calculateWaterNeed(SpeciesInfo speciesInfo){
+        if(speciesInfo.getMinimumPe()!=0||speciesInfo.getMaximumPe()!=0){
+            double waterNeed =(double) (speciesInfo.getMaximumPe() + speciesInfo.getMinimumPe()) / 2 /64;
+            double pe = (double) waterNeed/10;
+            if(pe<0.5){
+                water_interval=3;
+                water_type="scarcely";
+            }else if(pe>=0.5&&pe<1){
+                water_interval=3;
+                water_type="normal";
+            }else if(pe>=1&&pe<1.5){
+                water_interval=3;
+                water_type="abundant";
+            }else if(pe>=1.5&&pe<2.5){
+                water_interval=2;
+                water_type="normal";
+            }else{
+                water_interval=2;
+                water_type="abundant";
+            }
+        }else{
+            water_interval=3;
+            water_type="normal";
+        }
     }
 }

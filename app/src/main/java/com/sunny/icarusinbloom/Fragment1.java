@@ -63,7 +63,7 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
             if(plants!=null){
                 for (PlantItem p:plants) {
-                    System.out.println(p.toString());
+                    //System.out.println(p.toString());
                 }
                 list=plants;
                 adapter.setPlants(list);
@@ -154,14 +154,27 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         });
     }
 
+    SpeciesInfo speciesInfo;
     @Override
     public void onClick(PlantItem plantItem) {
 /*        Toast toast = Toast.makeText(getActivity(),"hi "+plantItem.toString(),Toast.LENGTH_SHORT);
         toast.show();*/
         Intent intent = new Intent(getContext(), PlantInfoActivity.class);
         intent.putExtra("plant", plantItem);
+        if(plantItem.getSpeciesId()!=-1) {
+            speciesViewModel.getSpeciesById(plantItem.getSpeciesId()).observe(getViewLifecycleOwner(), info->{
+                if(info!=null){
+                    speciesInfo=info;
+                    intent.putExtra("species",speciesInfo);
+                    //System.out.println("start from here!!!!!!!!!!!!!! "+speciesInfo.toString());
+                    startActivityForResult(intent,3);
+                }
+            });
+        }else{
+           // System.out.println("start from hereee");
+            startActivityForResult(intent,3);
+        }
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivityForResult(intent,3);
     }
 
 }
