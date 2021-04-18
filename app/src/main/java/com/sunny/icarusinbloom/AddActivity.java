@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
@@ -26,6 +27,15 @@ import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.login.User;
 import com.sunny.icarusinbloom.login.UserViewModel;
 import com.sunny.icarusinbloom.recycler.PlantItem;
+import com.sunny.icarusinbloom.webservice.PlantApi;
+import com.sunny.icarusinbloom.webservice.ServiceGenerator;
+import com.sunny.icarusinbloom.webservice.SpeciesInfo;
+import com.sunny.icarusinbloom.webservice.SpeciesResponse;
+import com.sunny.icarusinbloom.webservice.SpeciesSearchResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddActivity extends AppCompatActivity {
     String plantName="null";
@@ -33,6 +43,7 @@ public class AddActivity extends AppCompatActivity {
     String plantSpecies="null";
     String plantUri = "null";
     String plantBday = "null";
+    int speciesId = -1;
 
     public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
     public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
@@ -44,6 +55,9 @@ public class AddActivity extends AppCompatActivity {
     private int userId;
     //private UserViewModel userViewModel;
     PlantItem toAdd;
+    SpeciesInfo speciesInfo;
+    TextView button;
+    TextView warning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +101,10 @@ public class AddActivity extends AppCompatActivity {
         EditText species = findViewById(R.id.plantSpeciesEdit);
         EditText bday = findViewById(R.id.plantBdayEdit);
 
-        TextView button = findViewById(R.id.saveChangesAdd);
+        button = findViewById(R.id.saveChangesAdd);
+        button.setVisibility(View.INVISIBLE);
+        warning = findViewById(R.id.warningTextAddPlant);
+        warning.setVisibility(View.VISIBLE);
         Button addPlantImg = findViewById(R.id.addPlantImageButton);
 
         addPlantImg.setOnClickListener(v->{
@@ -116,12 +133,16 @@ public class AddActivity extends AppCompatActivity {
                 toast.show();
             }else {
                 //TODO: search for species id, get the species info, set it into the plant class and insert into Species db
-                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),-1,-1,"null");
+                setSpecies(rootLayout);
+                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),speciesId,-1,"null");
                 Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
                 toast.show();
                 System.out.println(toAdd.toString());
                 Intent intent = new Intent();
                 intent.putExtra("plantAdded", toAdd);
+                if(speciesInfo!=null){
+                    intent.putExtra("speciesAdded",speciesInfo);
+                }
                 setResult(RESULT_OK, intent);
             }
             finish();
@@ -158,5 +179,58 @@ public class AddActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public void setSpecies(View view) {
+        EditText species = findViewById(R.id.plantSpeciesEdit);
+        if(!species.getText().toString().isEmpty()) {
+            plantSpecies = species.getText().toString();
+            System.out.println("TYPED SPECIES");
+        }
+        String token = "De-v8aTD7o019T5P3T_ReGeB27zMkNdmb9rga5EhGCQ";
+        PlantApi plantApi = ServiceGenerator.getPlantApi();
+        if(plantSpecies!=null){
+            Call<SpeciesSearchResponse> call = plantApi.searchForSpecies(plantSpecies,token);
+            call.enqueue(new Callback<SpeciesSearchResponse>() {
+                @Override
+                public void onResponse(Call<SpeciesSearchResponse> call, Response<SpeciesSearchResponse> response) {
+                    if(response.code()==200){
+                        speciesId=response.body().getSpeciesId();
+                    }else{
+                        System.out.println("RESPONSE CODE NOT OKAY WHEN SEARCHING:"+response.code()+" "+response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SpeciesSearchResponse> call, Throwable t) {
+                    speciesId=-1;
+                    System.out.println("SEARCH FAILURE");
+                }
+            });
+        }
+
+        if(speciesId!=-1){
+            Call<SpeciesResponse> call = plantApi.getSpeciesInfo(speciesId,token);
+            call.enqueue(new Callback<SpeciesResponse>() {
+                @Override
+                public void onResponse(Call<SpeciesResponse> call, Response<SpeciesResponse> response) {
+                    if(response.code()==200){
+                        speciesInfo = response.body().getPlantInfo();
+                        System.out.println(speciesInfo.toString());
+                        Log.i("Species Info",speciesInfo.toString());
+                    }else{
+                        System.out.println("RESPONSE CODE NOT OKAY WHEN GETTING INFO:"+response.code()+" "+response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SpeciesResponse> call, Throwable t) {
+                    //nothing
+                    System.out.println("GETTING INFO FAILURE");
+                }
+            });
+        }
+        warning.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.VISIBLE);
     }
 }

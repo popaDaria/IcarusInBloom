@@ -3,6 +3,7 @@ package com.sunny.icarusinbloom;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ import com.sunny.icarusinbloom.login.UserViewModel;
 import com.sunny.icarusinbloom.recycler.PlantItem;
 import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
 import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
+import com.sunny.icarusinbloom.recycler.SpeciesViewModel;
+import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,7 @@ import static android.app.Activity.RESULT_OK;
 public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemClick{
 
     PlantItemViewModel viewModel;
+    SpeciesViewModel speciesViewModel;
     //UserViewModel viewModel1;
     List<PlantItem> list = new ArrayList<>();
     PlantItemAdapter adapter;
@@ -54,6 +58,7 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewModel = new ViewModelProvider(this).get(PlantItemViewModel.class);
+        speciesViewModel = new ViewModelProvider(this).get(SpeciesViewModel.class);
 
         viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
             if(plants!=null){
@@ -96,15 +101,35 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         startActivityForResult(intent,1);
     }
 
+    boolean found=false;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == 1) {
             if(resultCode==RESULT_OK){
-
                 super.onActivityResult(requestCode, resultCode, data);
                 Bundle bundle = data.getExtras();
                 PlantItem added = (PlantItem) bundle.getSerializable("plantAdded");
+                SpeciesInfo speciesAdded = (SpeciesInfo) bundle.getSerializable("speciesAdded");
                 viewModel.addPlant(added);
+                if(speciesAdded!=null){
+                    found=false;
+                    speciesViewModel.getAllSpecies().observe(getViewLifecycleOwner(),species->{
+                        if(species!=null){
+                            for(SpeciesInfo si : species){
+                                if(si.getSpeciesId()==speciesAdded.getSpeciesId()) {
+                                    found = true;
+                                }
+                            }
+                        }
+                    });
+                    if(!found) {
+                        speciesViewModel.insert(speciesAdded);
+                        Log.i("inserting", "inserting species info into table");
+                    }else{
+                        Log.i("inserting", "already existing species info in table");
+                    }
+                }
                 /*Toast toast = Toast.makeText(getContext(),"info received:"+ added.toString(),Toast.LENGTH_LONG);
                 toast.show();*/
                 //adapter.notifyDataSetChanged();

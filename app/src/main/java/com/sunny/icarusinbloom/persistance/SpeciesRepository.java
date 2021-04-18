@@ -43,7 +43,7 @@ public class SpeciesRepository {
         return speciesDAO.getAllSpecies();
     }
 
-    public LiveData<List<SpeciesInfo>> getSpeciesById(int id){
+    public LiveData<SpeciesInfo> getSpeciesById(int id){
         return speciesDAO.getSpeciesById(id);
     }
 

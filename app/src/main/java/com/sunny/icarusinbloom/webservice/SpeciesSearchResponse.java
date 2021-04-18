@@ -6,10 +6,12 @@ public class SpeciesSearchResponse {
     private ArrayList<DataObjects> data;
 
     public int getSpeciesId(){
-        if(data!=null)
-            return data.get(0).id;
-        else
-            return -1;
+        if(data!=null) {
+            if (data.size() != 0) {
+                return data.get(0).id;
+            }
+        }
+        return -1;
     }
 
     private class DataObjects{

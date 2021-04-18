@@ -27,5 +27,5 @@ public interface SpeciesDao {
     LiveData<List<SpeciesInfo>> getAllSpecies();
 
     @Query("SELECT * FROM Species WHERE speciesId= :id")
-    LiveData<List<SpeciesInfo>> getSpeciesById(int id);
+    LiveData<SpeciesInfo> getSpeciesById(int id);
 }
