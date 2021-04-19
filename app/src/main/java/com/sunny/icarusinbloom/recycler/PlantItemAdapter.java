@@ -14,7 +14,10 @@ import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.MainActivity;
 import com.sunny.icarusinbloom.R;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PlantItemAdapter extends RecyclerView.Adapter<PlantItemAdapter.ViewHolder> {
@@ -53,6 +56,14 @@ public class PlantItemAdapter extends RecyclerView.Adapter<PlantItemAdapter.View
             //holder.photo.setImageURI(Uri.parse(plants.get(position).getImage()));
             Picasso.get().load(Uri.parse(plants.get(position).getImage())).centerCrop().fit().into(holder.photo);
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+        Date today = new Date();
+        if(sdf.format(today).equals(plants.get(position).getBday().substring(0,5))){
+            holder.bdayImg.setVisibility(View.VISIBLE);
+            //TODO: send notif about it
+        }else{
+            holder.bdayImg.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -66,12 +77,14 @@ public class PlantItemAdapter extends RecyclerView.Adapter<PlantItemAdapter.View
         TextView name;
         TextView info;
         ImageView photo;
+        ImageView bdayImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             photo = itemView.findViewById(R.id.plantImage);
             name = itemView.findViewById(R.id.plantName);
             info = itemView.findViewById(R.id.plantInfo);
+            bdayImg = itemView.findViewById(R.id.plantBdayImage);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

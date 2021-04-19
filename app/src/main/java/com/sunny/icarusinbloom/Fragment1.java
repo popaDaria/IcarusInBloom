@@ -125,9 +125,9 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                     });
                     if(!found) {
                         speciesViewModel.insert(speciesAdded);
-                        Log.i("inserting", "inserting species info into table");
+                        System.out.println("inserting species info into table");
                     }else{
-                        Log.i("inserting", "already existing species info in table");
+                        System.out.println("already existing species info in table");
                     }
                 }
                 /*Toast toast = Toast.makeText(getContext(),"info received:"+ added.toString(),Toast.LENGTH_LONG);
@@ -157,7 +157,7 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     SpeciesInfo speciesInfo;
     @Override
     public void onClick(PlantItem plantItem) {
-/*        Toast toast = Toast.makeText(getActivity(),"hi "+plantItem.toString(),Toast.LENGTH_SHORT);
+      /*  Toast toast = Toast.makeText(getActivity(),"hi "+plantItem.toString(),Toast.LENGTH_SHORT);
         toast.show();*/
         Intent intent = new Intent(getContext(), PlantInfoActivity.class);
         intent.putExtra("plant", plantItem);
@@ -166,12 +166,12 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                 if(info!=null){
                     speciesInfo=info;
                     intent.putExtra("species",speciesInfo);
-                    //System.out.println("start from here!!!!!!!!!!!!!! "+speciesInfo.toString());
+                    startActivityForResult(intent,3);
+                }else{
                     startActivityForResult(intent,3);
                 }
             });
         }else{
-           // System.out.println("start from hereee");
             startActivityForResult(intent,3);
         }
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

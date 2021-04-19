@@ -193,7 +193,7 @@
             android:background="@color/light_orange"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/plant" />
 
         </androidx.cardview.widget.CardView>
 

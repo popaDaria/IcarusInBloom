@@ -38,8 +38,12 @@ public class PlantInfoActivity extends AppCompatActivity {
         TextView extra = findViewById(R.id.plantInfoViewExtra);
         ImageView image = findViewById(R.id.plantImageInfoView);
 
-        Picasso.get().load(Uri.parse(plant.getImage())).centerCrop().fit().into(image);
-        String desc = "Plant description: " + plant.getInfo();
+        if(!plant.getImage().equals("null")) {
+            Picasso.get().load(Uri.parse(plant.getImage())).centerCrop().fit().into(image);
+        }else{
+            image.setImageResource(R.drawable.plant);
+        }
+        String desc = "Description: " + plant.getInfo();
         String spec = "Plant species: " + plant.getSpecies();
         String bd = "Plant birthday: " + plant.getBday();
         info.setText(desc);
@@ -62,7 +66,7 @@ public class PlantInfoActivity extends AppCompatActivity {
             if (speciesInfo.getMinimumTemp() != 0)
                 extraDesc += "\u2022 MINIMUM TEMP: " + speciesInfo.getMinimumTemp() + "\n";
             if (speciesInfo.getSoilLevel() != -1)
-                extraDesc += "\u2022 PREFERRED SOIL NUTRIMENTS LEVEL(0-10): "+speciesInfo.getSoilLevel();
+                extraDesc += "\u2022 LIKED SOIL NUTRIMENTS LVL: "+speciesInfo.getSoilLevel()+"/10";
         }
         extra.setText(extraDesc);
 

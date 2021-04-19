@@ -54,8 +54,7 @@ public class AddActivity extends AppCompatActivity {
     private int revealX;
     private int revealY;
     private User user;
-    private int userId;
-    //private UserViewModel userViewModel;
+    //private int userId;
     PlantItem toAdd;
     SpeciesInfo speciesInfo;
     TextView button;
@@ -77,12 +76,6 @@ public class AddActivity extends AppCompatActivity {
             revealX = intent1.getIntExtra(EXTRA_CIRCULAR_REVEAL_X,0);
             revealY = intent1.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y,0);
             user = (User) intent1.getExtras().getSerializable("loggedUser");
-
-/*            userViewModel.getUserId(user.getEmail()).observe(this, x->{
-                if(x!=null){
-                    userId = x;
-                }
-            });*/
 
             ViewTreeObserver viewTreeObserver = rootLayout.getViewTreeObserver();
             if(viewTreeObserver.isAlive()){
@@ -108,6 +101,8 @@ public class AddActivity extends AppCompatActivity {
         warning = findViewById(R.id.warningTextAddPlant);
         warning.setVisibility(View.VISIBLE);
         Button addPlantImg = findViewById(R.id.addPlantImageButton);
+        ImageView plantPlaceholder = findViewById(R.id.addPlantImageView);
+        plantPlaceholder.setImageResource(R.drawable.plant);
 
         addPlantImg.setOnClickListener(v->{
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -134,7 +129,6 @@ public class AddActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "please input a name & species", Toast.LENGTH_SHORT);
                 toast.show();
             }else {
-                //TODO: search for species id, get the species info, set it into the plant class and insert into Species db
                 setSpecies(rootLayout);
                 toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),speciesId,water_interval,water_type);
                 //Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
@@ -143,6 +137,7 @@ public class AddActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("plantAdded", toAdd);
                 if(speciesInfo!=null){
+                    System.out.println("ADDING SPECIES INFO");
                     intent.putExtra("speciesAdded",speciesInfo);
                 }
                 setResult(RESULT_OK, intent);
@@ -189,6 +184,7 @@ public class AddActivity extends AppCompatActivity {
             plantSpecies = species.getText().toString();
             System.out.println("TYPED SPECIES");
         }
+
         String token = "De-v8aTD7o019T5P3T_ReGeB27zMkNdmb9rga5EhGCQ";
         PlantApi plantApi = ServiceGenerator.getPlantApi();
         if(plantSpecies!=null){
@@ -198,6 +194,7 @@ public class AddActivity extends AppCompatActivity {
                 public void onResponse(Call<SpeciesSearchResponse> call, Response<SpeciesSearchResponse> response) {
                     if(response.code()==200){
                         speciesId=response.body().getSpeciesId();
+                        setSpeciesInfo(speciesId);
                     }else{
                         System.out.println("RESPONSE CODE NOT OKAY WHEN SEARCHING:"+response.code()+" "+response.body());
                     }
@@ -210,7 +207,13 @@ public class AddActivity extends AppCompatActivity {
                 }
             });
         }
+        warning.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.VISIBLE);
+    }
 
+    private void setSpeciesInfo(int speciesId){
+        String token = "De-v8aTD7o019T5P3T_ReGeB27zMkNdmb9rga5EhGCQ";
+        PlantApi plantApi = ServiceGenerator.getPlantApi();
         if(speciesId!=-1){
             Call<SpeciesResponse> call = plantApi.getSpeciesInfo(speciesId,token);
             call.enqueue(new Callback<SpeciesResponse>() {
@@ -220,7 +223,7 @@ public class AddActivity extends AppCompatActivity {
                         speciesInfo = response.body().getPlantInfo();
                         calculateWaterNeed(speciesInfo);
                         System.out.println(speciesInfo.toString());
-                        Log.i("Species Info",speciesInfo.toString());
+                        System.out.println("Species Info: "+speciesInfo.toString());
                     }else{
                         System.out.println("RESPONSE CODE NOT OKAY WHEN GETTING INFO:"+response.code()+" "+response.body());
                     }
@@ -236,8 +239,6 @@ public class AddActivity extends AppCompatActivity {
             water_interval=3;
             water_type="normal";
         }
-        warning.setVisibility(View.INVISIBLE);
-        button.setVisibility(View.VISIBLE);
     }
 
     private void calculateWaterNeed(SpeciesInfo speciesInfo){
