@@ -130,7 +130,7 @@ public class AddActivity extends AppCompatActivity {
                 toast.show();
             }else {
                 setSpecies(rootLayout);
-                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),speciesId,water_interval,water_type);
+                toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),speciesId,water_interval,water_type,"no record");
                 //Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
                 //toast.show();
                 System.out.println(toAdd.toString());
@@ -236,7 +236,7 @@ public class AddActivity extends AppCompatActivity {
                 }
             });
         }else{
-            water_interval=3;
+            water_interval=2;
             water_type="normal";
         }
     }
@@ -249,20 +249,17 @@ public class AddActivity extends AppCompatActivity {
                 water_interval=3;
                 water_type="scarcely";
             }else if(pe>=0.5&&pe<1){
-                water_interval=3;
+                water_interval=2;
                 water_type="normal";
             }else if(pe>=1&&pe<1.5){
                 water_interval=3;
                 water_type="abundant";
-            }else if(pe>=1.5&&pe<2.5){
-                water_interval=2;
-                water_type="normal";
             }else{
                 water_interval=2;
                 water_type="abundant";
             }
         }else{
-            water_interval=3;
+            water_interval=2;
             water_type="normal";
         }
     }

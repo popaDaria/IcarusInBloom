@@ -42,4 +42,12 @@ public class PlantItemViewModel extends AndroidViewModel {
         return repository.getAllUserPlant(userId);
     }
 
+    public LiveData<List<PlantItem>> getAllPlantsByWatered(int userId){
+        return repository.getAllPlantsByWatered(userId);
+    }
+
+    public void update(PlantItem item){
+        repository.update(item);
+    }
+
 }

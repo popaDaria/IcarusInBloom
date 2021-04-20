@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.login.User;
 import com.sunny.icarusinbloom.login.UserViewModel;
@@ -52,8 +53,8 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment1,container,false);
 
-      /*  int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        rootView.setSystemUiVisibility(uiOptions);*/
+        /*int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        container.setSystemUiVisibility(uiOptions);*/
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -137,9 +138,16 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         }else if(requestCode==3){
             if(resultCode==RESULT_OK){
                 super.onActivityResult(requestCode,resultCode,data);
-                Bundle bundle = data.getExtras();
-                PlantItem toDelete = (PlantItem) bundle.getSerializable("deletePlant");
-                viewModel.deletePlant(toDelete);
+                Snackbar snackbar = Snackbar.make(rootView, "Are you sure you want to delete the plant?",Snackbar.LENGTH_LONG)
+                        .setAction("Delete", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Bundle bundle = data.getExtras();
+                                PlantItem toDelete = (PlantItem) bundle.getSerializable("deletePlant");
+                                viewModel.deletePlant(toDelete);
+                            }
+                        });
+                snackbar.show();
             }
         }
         viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(this,plants->{

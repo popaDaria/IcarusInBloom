@@ -28,6 +28,9 @@ public interface PlantDao {
     @Query("SELECT * FROM Plants")
     LiveData<List<PlantItem>> getAllPlants();
 
+    @Query("select * from Plants where ownerId=:userId order by lastWatered")
+    LiveData<List<PlantItem>> getAllPlantsByWatered(int userId);
+
     @Query("SELECT * FROM Plants WHERE plantId= :id")
     LiveData<PlantItem> getPlant(int id);
 

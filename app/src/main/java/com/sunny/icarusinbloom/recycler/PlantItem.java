@@ -39,9 +39,10 @@ public class PlantItem implements Serializable {
     private String bday;
     private String water_type;
     private int water_interval;
+    private String lastWatered;
 
     public PlantItem(String name, String info, String species, String image, String bday, int ownerId,
-                     int speciesId, int water_interval, String water_type) {
+                     int speciesId, int water_interval, String water_type,String lastWatered) {
         this.name = name;
         this.info = info;
         this.species = species;
@@ -51,6 +52,15 @@ public class PlantItem implements Serializable {
         this.speciesId=speciesId;
         this.water_interval=water_interval;
         this.water_type=water_type;
+        this.lastWatered=lastWatered;
+    }
+
+    public String getLastWatered() {
+        return lastWatered;
+    }
+
+    public void setLastWatered(String lastWatered) {
+        this.lastWatered = lastWatered;
     }
 
     public int getSpeciesId() {
@@ -146,6 +156,7 @@ public class PlantItem implements Serializable {
                 ", bday='" + bday + '\'' +
                 ", water_type='" + water_type + '\'' +
                 ", water_interval=" + water_interval +
+                ", lastWatered='" + lastWatered + '\'' +
                 '}';
     }
 }

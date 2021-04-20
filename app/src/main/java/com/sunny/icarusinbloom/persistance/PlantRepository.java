@@ -41,6 +41,9 @@ public class PlantRepository {
     public LiveData<List<PlantItem>> getAllPlants(){
        return allPlants;
     }
+    public LiveData<List<PlantItem>> getAllPlantsByWatered(int userId){
+        return plantDao.getAllPlantsByWatered(userId);
+    }
 
     public LiveData<PlantItem> getPlant(int id){
         return plantDao.getPlant(id);
@@ -54,6 +57,10 @@ public class PlantRepository {
         executorService.execute(()->{
             plantDao.delete(item);
         });
+    }
+
+    public void update(PlantItem item){
+        executorService.execute(()->plantDao.update(item));
     }
 
 }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginBottom="15dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/wateringMainLayout"
+    android:orientation="horizontal"
+    android:background="@drawable/item_shadow">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp">
+
+        <ImageView
+            android:id="@+id/wateringPlantPhoto"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            tools:srcCompat="@tools:sample/avatars"
+            android:background="@color/light_orange"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/plantNameWatering"
+            android:layout_width="211dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textColor="@color/accent_dark"
+            android:textSize="16dp"
+            android:gravity="fill_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/wateringInfoField"
+            android:layout_width="211dp"
+            android:textStyle="italic"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:text="water info: normal, every 3 days"
+            android:gravity="fill_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plantNameWatering" />
+
+        <TextView
+            android:id="@+id/lastWateredDate"
+            android:textStyle="italic"
+            android:layout_width="211dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:text="last water date: 12/02/2002"
+            android:gravity="fill_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wateringInfoField" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/waterPlantButton"
+                android:layout_width="65dp"
+                android:layout_height="90dp"
+                app:srcCompat="@drawable/drop"
+                android:background="@drawable/watering_bg"/>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

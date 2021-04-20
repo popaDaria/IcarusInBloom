@@ -48,7 +48,6 @@
                 android:background="@color/item_yellow"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textStart"
-                android:text="BUNAPLANt"
                 android:paddingVertical="8dp"
                 android:paddingHorizontal="12dp"
                 android:textStyle="bold"
