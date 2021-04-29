@@ -1,41 +1,22 @@
 package com.sunny.icarusinbloom;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.login.User;
-import com.sunny.icarusinbloom.login.UserViewModel;
-import com.sunny.icarusinbloom.persistance.UserRepository;
-import com.sunny.icarusinbloom.recycler.PlantItem;
-import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
-import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
 import com.sunny.icarusinbloom.tabs.SectionsPagerAdapter;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -44,13 +25,42 @@ public class MainActivity extends AppCompatActivity{
     User user;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ImageView userPic = findViewById(R.id.userImage);
+        switch (loggedUser.getPhotoPref()){
+            case "male":
+                Picasso.get().load(R.drawable.male_icon_farmer).centerCrop().fit().into(userPic);
+                break;
+            case "female":
+                Picasso.get().load(R.drawable.female_farmer).centerCrop().fit().into(userPic);
+                break;
+            default:
+                Picasso.get().load(R.drawable.other_icon).centerCrop().fit().into(userPic);
+                break;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView userPic = findViewById(R.id.userImage);
-        //TODO: change to user pic preference
-        Picasso.get().load(R.drawable.succulent).centerCrop().fit().into(userPic);
+       /* View thisView = findViewById(R.id.mainActivityLayout);
+        thisView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);*/
+
         TextView titleHeader= findViewById(R.id.title_header);
 
         loggedUser = LogInActivity.loggedUser;
@@ -60,6 +70,19 @@ public class MainActivity extends AppCompatActivity{
 
         String newTitle = "Hello, "+loggedUser.getFirstName()+" c:";
         titleHeader.setText(newTitle);
+        ImageView userPic = findViewById(R.id.userImage);
+        switch (loggedUser.getPhotoPref()){
+            case "male":
+                Picasso.get().load(R.drawable.male_icon_farmer).centerCrop().fit().into(userPic);
+                break;
+            case "female":
+                Picasso.get().load(R.drawable.female_farmer).centerCrop().fit().into(userPic);
+                break;
+            default:
+                Picasso.get().load(R.drawable.other_icon).centerCrop().fit().into(userPic);
+                break;
+        }
+
        // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -86,7 +109,8 @@ public class MainActivity extends AppCompatActivity{
 
         if(item.getItemId()==R.id.action_settings)
         {
-            //TODO: go to settings menu
+            Intent intent = new Intent(this,SettingsActivity.class);
+            startActivity(intent);
             return true;
         }else if(item.getItemId()==R.id.action_logOut){
             Intent intent = new Intent(this,LogInActivity.class);

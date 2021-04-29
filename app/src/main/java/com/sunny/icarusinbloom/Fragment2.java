@@ -21,6 +21,7 @@ import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
 import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
 import com.sunny.icarusinbloom.recycler.SpeciesViewModel;
 import com.sunny.icarusinbloom.recycler.WateringItemAdapter;
+import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
 
     PlantItemViewModel viewModel;
     List<PlantItem> list = new ArrayList<>();
+    SpeciesViewModel speciesViewModel;
+    List<SpeciesInfo> speciesInfos = new ArrayList<>();
+
     WateringItemAdapter adapter;
     View rootView;
     RecyclerView recyclerView;
@@ -43,6 +47,7 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewModel = new ViewModelProvider(this).get(PlantItemViewModel.class);
+        speciesViewModel = new ViewModelProvider(this).get(SpeciesViewModel.class);
 
         viewModel.getAllPlantsByWatered(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
             if(plants!=null){
@@ -55,7 +60,15 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
             }
         });
 
-        adapter = new WateringItemAdapter(list,this);
+        speciesViewModel.getAllSpecies().observe(getViewLifecycleOwner(), species->{
+            if(species!=null){
+                speciesInfos = species;
+                adapter.setSpecies(speciesInfos);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        adapter = new WateringItemAdapter(list,this,speciesInfos);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -68,15 +81,24 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
     }
 
     private void waterAll() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date today = new Date();
-        String newWateredDate = sdf.format(today);
-        for (PlantItem plant:list) {
-            plant.setLastWatered(newWateredDate);
-            viewModel.update(plant);
-        }
-        updateList();
-        Toast.makeText(getContext(),"All plants marked as watered!",Toast.LENGTH_SHORT).show();
+
+        Snackbar snackbar = Snackbar.make(rootView,"Do you want to water all?", Snackbar.LENGTH_LONG)
+                .setAction("CONFIRM", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date today = new Date();
+                        String newWateredDate = sdf.format(today);
+                        for (PlantItem plant:list) {
+                            plant.setLastWatered(newWateredDate);
+                            viewModel.update(plant);
+                        }
+                        updateList();
+                        Toast.makeText(getContext(),"All plants marked as watered!",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+        snackbar.show();
     }
 
     private void updateList(){

@@ -12,21 +12,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.R;
+import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
 import java.util.List;
 
 public class WateringItemAdapter extends RecyclerView.Adapter<WateringItemAdapter.ViewHolder> {
     private List<PlantItem> plants;
+    private List<SpeciesInfo> species;
     OnListItemClick listItemClick;
 
-    public WateringItemAdapter(List<PlantItem> plants, OnListItemClick onListItemClick) {
+    public WateringItemAdapter(List<PlantItem> plants, OnListItemClick onListItemClick, List<SpeciesInfo> species) {
         this.plants = plants;
         this.listItemClick=onListItemClick;
+        this.species=species;
     }
 
     public void setPlants(List<PlantItem> plants) {
         this.plants.clear();
         this.plants.addAll(plants);
+    }
+
+    public void setSpecies(List<SpeciesInfo> species) {
+        this.species.clear();
+        this.species.addAll(species);
     }
 
     @NonNull
@@ -48,6 +56,21 @@ public class WateringItemAdapter extends RecyclerView.Adapter<WateringItemAdapte
         }
         holder.wateringInfo.setText(plants.get(position).getWater_type()+", every "+plants.get(position).getWater_interval()+" days");
         holder.lastWaterDate.setText("Last watered: "+plants.get(position).getLastWatered());
+
+        SpeciesInfo specie = null;
+        for (SpeciesInfo sp:species) {
+            if(plants.get(position).getSpeciesId()==sp.getSpeciesId()){
+                specie=sp;
+            }
+        }
+        if(specie!=null){
+            if(specie.getSoilLevel()>=5)
+                holder.soilChange.setText("Soil change: 2/year");
+            else
+                holder.soilChange.setText("Soil change: 1/year");
+        }else{
+            holder.soilChange.setText("Soil change: no indications");
+        }
     }
 
     @Override
@@ -61,6 +84,7 @@ public class WateringItemAdapter extends RecyclerView.Adapter<WateringItemAdapte
         TextView name;
         TextView wateringInfo;
         TextView lastWaterDate;
+        TextView soilChange;
         ImageView plantPhoto;
         ImageView waterButton;
 
@@ -71,6 +95,7 @@ public class WateringItemAdapter extends RecyclerView.Adapter<WateringItemAdapte
             lastWaterDate = itemView.findViewById(R.id.lastWateredDate);
             plantPhoto = itemView.findViewById(R.id.wateringPlantPhoto);
             waterButton = itemView.findViewById(R.id.waterPlantButton);
+            soilChange = itemView.findViewById(R.id.soilChange);
 
             waterButton.setOnClickListener(new View.OnClickListener() {
                 @Override

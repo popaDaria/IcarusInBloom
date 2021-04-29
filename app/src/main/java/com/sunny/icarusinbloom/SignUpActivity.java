@@ -72,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
                 if(uniqueEmail) {
-                    User user = new User(userFirstName, userLastName, userPassword, userEmail, userBday);
+                    User user = new User(userFirstName, userLastName, userPassword, userEmail, userBday, "other","true");
                     userViewModel.insert(user);
 
                     userViewModel.getAllUsers().observe(this,users->{

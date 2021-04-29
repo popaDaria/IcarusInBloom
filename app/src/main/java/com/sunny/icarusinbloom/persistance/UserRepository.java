@@ -39,4 +39,8 @@ public class UserRepository {
         return userDao.getUserId(email);
     }
 
+    public void update(User user){
+        executorService.execute(()->userDao.update(user));
+    }
+
 }

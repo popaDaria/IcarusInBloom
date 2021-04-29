@@ -28,4 +28,7 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<Integer> getUserId(String email){
         return repository.getUserId(email);
     }
+    public void update(User user){
+        repository.update(user);
+    }
 }

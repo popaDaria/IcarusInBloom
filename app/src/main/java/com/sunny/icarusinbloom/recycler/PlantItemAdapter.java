@@ -64,6 +64,7 @@ public class PlantItemAdapter extends RecyclerView.Adapter<PlantItemAdapter.View
         }else{
             holder.bdayImg.setVisibility(View.INVISIBLE);
         }
+
     }
 
     @Override

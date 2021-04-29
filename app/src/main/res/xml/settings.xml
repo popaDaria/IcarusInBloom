@@ -2,7 +2,8 @@
     <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <SwitchPreferenceCompat
             app:key="mails"
@@ -12,11 +13,13 @@
     <Preference
             app:key="feedback"
             app:summary="Please report any issues or possible new features here"
-            app:title="Send feedback"/>
+            app:title="Send feedback" />
 
-    <MultiSelectListPreference
-        app:title="Select profile pic"
-        app:key="pfp"
+    <ListPreference
+        app:key="gender"
+        app:title="Select gender preference for profile photo"
+        android:entries="@array/Gender"
+        android:entryValues="@array/GenderData"
         />
 
     </PreferenceScreen>

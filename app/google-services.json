@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1051203621253",
+    "project_id": "icarusinbloom-7321c",
+    "storage_bucket": "icarusinbloom-7321c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051203621253:android:27737dca35697c79cfb4ec",
+        "android_client_info": {
+          "package_name": "com.sunny.icarusinbloom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051203621253-2to7fljrmps7lok81jq168bvoc6l1sil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpVs48bYPUoJIUzP7OVt6TB-qQx3o7btI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051203621253-2to7fljrmps7lok81jq168bvoc6l1sil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

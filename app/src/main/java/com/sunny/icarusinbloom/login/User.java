@@ -17,13 +17,17 @@ public class User implements Serializable {
     private String password;
     private String email;
     private String bday;
+    private String photoPref;
+    private String mailPref;
 
-    public User(String firstName, String lastName, String password, String email, String bday) {
+    public User(String firstName, String lastName, String password, String email, String bday, String photoPref, String mailPref) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
         this.bday = bday;
+        this.photoPref = photoPref;
+        this.mailPref=mailPref;
     }
 
     @Override
@@ -35,7 +39,25 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", bday='" + bday + '\'' +
+                ", photoPref='" + photoPref + '\'' +
+                ", mailPref='" + mailPref + '\'' +
                 '}';
+    }
+
+    public String getMailPref() {
+        return mailPref;
+    }
+
+    public void setMailPref(String mailPref) {
+        this.mailPref = mailPref;
+    }
+
+    public String getPhotoPref() {
+        return photoPref;
+    }
+
+    public void setPhotoPref(String photoPref) {
+        this.photoPref = photoPref;
     }
 
     public String getPassword() {
