@@ -37,11 +37,13 @@ public class LogInActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("MyPrefs",MODE_PRIVATE);
         userEmail = prefs.getString("userEmail","");
-        if(userEmail!=null)
-            email.setText(userEmail);
         userPassword = prefs.getString("userPassword","");
-        if(userPassword!=null)
+        if(userEmail!=null&&userPassword!=null){
+            email.setText(userEmail);
             password.setText(userPassword);
+            //View view = findViewById(R.id.logInMainLayout);
+            //login(view);
+        }
     }
 
     @Override

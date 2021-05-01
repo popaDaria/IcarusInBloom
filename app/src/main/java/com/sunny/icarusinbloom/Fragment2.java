@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +41,9 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
     View rootView;
     RecyclerView recyclerView;
 
+    ImageView noPlantImg;
+    TextView noPlantText;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +54,15 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
         viewModel = new ViewModelProvider(this).get(PlantItemViewModel.class);
         speciesViewModel = new ViewModelProvider(this).get(SpeciesViewModel.class);
 
+        noPlantImg = rootView.findViewById(R.id.noPlantsImage);
+        noPlantText = rootView.findViewById(R.id.noPlantsText);
+        setNoPlantViewOff();
+
+        FloatingActionButton fab = rootView.findViewById(R.id.fab_water);
+        fab.setOnClickListener(v -> {
+            waterAll();
+        });
+
         viewModel.getAllPlantsByWatered(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
             if(plants!=null){
                /* for (PlantItem p:plants) {
@@ -57,6 +71,15 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
+                setNoPlantViewOff();
+                fab.setVisibility(View.VISIBLE);
+                if(plants.size()==0) {
+                    setNoPlantViewOn();
+                    fab.setVisibility(View.INVISIBLE);
+                }
+            }else{
+                setNoPlantViewOn();
+                fab.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -72,14 +95,17 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        FloatingActionButton fab = rootView.findViewById(R.id.fab_water);
-        fab.setOnClickListener(v -> {
-            waterAll();
-        });
-
         return rootView;
     }
 
+    private void setNoPlantViewOn(){
+        noPlantImg.setVisibility(View.VISIBLE);
+        noPlantText.setVisibility(View.VISIBLE);
+    }
+    private void setNoPlantViewOff(){
+        noPlantImg.setVisibility(View.INVISIBLE);
+        noPlantText.setVisibility(View.INVISIBLE);
+    }
     private void waterAll() {
 
         Snackbar snackbar = Snackbar.make(rootView,"Do you want to water all?", Snackbar.LENGTH_LONG)

@@ -1,12 +1,17 @@
 package com.sunny.icarusinbloom;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +21,17 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.login.User;
+import com.sunny.icarusinbloom.notif.AlarmReceiver;
 import com.sunny.icarusinbloom.tabs.SectionsPagerAdapter;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity{
 
     public static User loggedUser;
     //private UserViewModel userViewModel;
-    User user;
+    //User user;
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onStart() {
@@ -95,6 +104,13 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+
+        Intent alarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
+
+        start();
+        startAt8();
+
         //System.out.println(loggedUser.toString());
     }
 
@@ -118,5 +134,33 @@ public class MainActivity extends AppCompatActivity{
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void start() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 1000 * 60 ;
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Log.e("Alarm","started");
+        //Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
+    }
+
+    public void cancel() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
+        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
+    }
+
+    public void startAt8() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 1000 * 60 * 60 * 12;
+
+        /* Set the alarm to start at 8 AM */
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 0);
+
+        /* Repeating on every 12h interval */
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
     }
 }

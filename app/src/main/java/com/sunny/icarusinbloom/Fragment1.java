@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,6 +49,8 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     PlantItemAdapter adapter;
     View rootView;
     RecyclerView recyclerView;
+    ImageView noPlantImg;
+    TextView noPlantText;
 
     @Nullable
     @Override
@@ -61,6 +65,10 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         viewModel = new ViewModelProvider(this).get(PlantItemViewModel.class);
         speciesViewModel = new ViewModelProvider(this).get(SpeciesViewModel.class);
 
+        noPlantImg = rootView.findViewById(R.id.noPlantsImage);
+        noPlantText = rootView.findViewById(R.id.noPlantsText);
+        setNoPlantViewOff();
+
         viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
             if(plants!=null){
                 for (PlantItem p:plants) {
@@ -69,7 +77,13 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
+                if(plants.size()==0){
+                    setNoPlantViewOn();
+                }
+            }else{
+                setNoPlantViewOn();
             }
+
         });
 
         adapter = new PlantItemAdapter(list,this);
@@ -85,6 +99,15 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         });
 
         return rootView;
+    }
+
+    private void setNoPlantViewOn(){
+        noPlantImg.setVisibility(View.VISIBLE);
+        noPlantText.setVisibility(View.VISIBLE);
+    }
+    private void setNoPlantViewOff(){
+        noPlantImg.setVisibility(View.INVISIBLE);
+        noPlantText.setVisibility(View.INVISIBLE);
     }
 
     public void presentActivity(View view){
@@ -158,6 +181,12 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
+                setNoPlantViewOff();
+                if(plants.size()==0){
+                    setNoPlantViewOn();
+                }
+            }else{
+                setNoPlantViewOn();
             }
         });
     }

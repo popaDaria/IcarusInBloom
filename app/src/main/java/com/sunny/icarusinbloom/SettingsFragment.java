@@ -27,10 +27,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto: popadaria19@gmail.com"));
-                intent.putExtra(Intent.EXTRA_EMAIL,MainActivity.loggedUser.getEmail());
-                intent.putExtra(Intent.EXTRA_REFERRER,"z");
-                intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback for IcarusInBloom");
+                String data = "mailto:" +Uri.encode("popadaria19@gmail.com")+
+                        "?subject="+Uri.encode("Feedback for InBloom app");
+                intent.setData(Uri.parse(data));
                 startActivity(intent);
                 return true;
             }

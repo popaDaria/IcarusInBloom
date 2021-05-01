@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="ACTION_OPEN_DOCUMENT"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/appicon2"
@@ -39,6 +40,20 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <receiver android:name=".notif.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Will not be called unless the application explicitly enables it -->
+        <receiver android:name=".notif.DeviceBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
