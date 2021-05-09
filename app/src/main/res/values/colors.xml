@@ -11,6 +11,7 @@
     <color name="item_yellow">#FEF8B7</color>
     <color name="item_shadow">#C6C4B0</color>
     <color name="light_orange">#FBCE91</color>
+    <color name="light_orange_shadow">#E4BB84</color>
     <color name="darker_orange">#FFBA5C</color>
     <color name="baby_blue">#C3EAFF</color>
     <color name="baby_blue_shadow">#89A3B1</color>

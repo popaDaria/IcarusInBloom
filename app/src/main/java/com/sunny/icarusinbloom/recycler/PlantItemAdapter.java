@@ -60,7 +60,6 @@ public class PlantItemAdapter extends RecyclerView.Adapter<PlantItemAdapter.View
         Date today = new Date();
         if(sdf.format(today).equals(plants.get(position).getBday().substring(0,5))){
             holder.bdayImg.setVisibility(View.VISIBLE);
-            //TODO: send notif about it
         }else{
             holder.bdayImg.setVisibility(View.INVISIBLE);
         }

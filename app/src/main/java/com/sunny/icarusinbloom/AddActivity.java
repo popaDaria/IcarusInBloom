@@ -1,6 +1,7 @@
 package com.sunny.icarusinbloom;
 
 import android.animation.Animator;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,6 +35,10 @@ import com.sunny.icarusinbloom.webservice.ServiceGenerator;
 import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 import com.sunny.icarusinbloom.webservice.SpeciesResponse;
 import com.sunny.icarusinbloom.webservice.SpeciesSearchResponse;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,6 +103,32 @@ public class AddActivity extends AppCompatActivity {
         EditText species = findViewById(R.id.plantSpeciesEdit);
         EditText bday = findViewById(R.id.plantBdayEdit);
 
+        DatePickerDialog.OnDateSetListener dateSetListener =
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        plantBday = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
+                        bday.setText(plantBday);
+                    }
+                };
+
+        Date date= new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = sdf.format(date);
+        String[] elem = dateString.split("/");
+        int day,month,year;
+        day = Integer.parseInt(elem[0]);
+        month = Integer.parseInt(elem[1]);
+        year = Integer.parseInt(elem[2]);
+
+        bday.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(AddActivity.this,dateSetListener, year,month,day).show();
+            }
+        });
+
         button = findViewById(R.id.saveChangesAdd);
         button.setVisibility(View.INVISIBLE);
         warning = findViewById(R.id.warningTextAddPlant);
@@ -121,9 +154,9 @@ public class AddActivity extends AppCompatActivity {
                 plantName=name.getText().toString();
             if(!species.getText().toString().isEmpty())
                 plantSpecies=species.getText().toString();
-            if(!bday.getText().toString().isEmpty()){
+            /*if(!bday.getText().toString().isEmpty()){
                 plantBday=bday.getText().toString();
-            }
+            }*/
 
             if(plantName.equals("null")|| plantSpecies.equals("null")) {
                 Toast toast = Toast.makeText(this, "please input a name & species", Toast.LENGTH_SHORT);
@@ -148,6 +181,7 @@ public class AddActivity extends AppCompatActivity {
             toast.show();*/
         });
     }
+
 
     protected void revealActivity(int x,int y){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
@@ -263,4 +297,6 @@ public class AddActivity extends AppCompatActivity {
             water_type="normal";
         }
     }
+
+
 }

@@ -7,7 +7,7 @@
                 android:endColor="@color/bright_blue"
                 android:startColor="@color/baby_blue"/>
             <stroke
-                android:width="7dp"
+                android:width="3dp"
                 android:color="@color/baby_blue"/>
             <corners
                 android:radius="7dp"/>
@@ -24,7 +24,7 @@
                 android:color="@color/light_orange"/>
             <stroke
                 android:width="2dp"
-                android:color="@color/darker_orange"/>
+                android:color="@color/light_orange_shadow"/>
             <corners
                 android:radius="6dp"/>
             <padding

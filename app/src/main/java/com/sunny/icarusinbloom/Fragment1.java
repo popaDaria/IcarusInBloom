@@ -35,8 +35,12 @@ import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
 import com.sunny.icarusinbloom.recycler.SpeciesViewModel;
 import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import pl.droidsonroids.gif.GifImageView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -51,6 +55,7 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     RecyclerView recyclerView;
     ImageView noPlantImg;
     TextView noPlantText;
+
 
     @Nullable
     @Override

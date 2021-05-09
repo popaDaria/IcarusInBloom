@@ -24,7 +24,11 @@ import com.sunny.icarusinbloom.login.User;
 import com.sunny.icarusinbloom.notif.AlarmReceiver;
 import com.sunny.icarusinbloom.tabs.SectionsPagerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
     //private UserViewModel userViewModel;
     //User user;
     private PendingIntent pendingIntent;
+    boolean showGif = false;
 
     @Override
     protected void onStart() {
@@ -111,6 +116,23 @@ public class MainActivity extends AppCompatActivity{
         start();
         startAt8();
 
+
+        GifImageView gifView = findViewById(R.id.gif);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+        Date today = new Date();
+        if(sdf.format(today).equals(MainActivity.loggedUser.getBday().substring(0,5))){
+            showGif=true;
+        }
+
+        if(showGif){
+            gifView.setVisibility(View.VISIBLE);
+            gifView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    gifView.setVisibility(View.INVISIBLE);
+                }
+            },4000);
+        }
         //System.out.println(loggedUser.toString());
     }
 
@@ -138,7 +160,7 @@ public class MainActivity extends AppCompatActivity{
 
     public void start() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        int interval = 1000 * 60 ;
+        int interval = 1000 * 60 * 60 * 6;
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
         Log.e("Alarm","started");
         //Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();

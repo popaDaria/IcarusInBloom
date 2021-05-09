@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Gender">
-        <item>Other/Rather not say</item>
-        <item>Male</item>
-        <item>Female</item>
+        <item>Plant</item>
+        <item>Male Gardener</item>
+        <item>Female Gardener</item>
     </string-array>
 
     <string-array name="GenderData">

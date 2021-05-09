@@ -8,6 +8,14 @@
     tools:context=".MainActivity"
     android:id="@+id/mainActivityLayout">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/purple_confetti"
+        android:id="@+id/gif"
+        android:visibility="invisible"
+        />
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,6 +44,7 @@
             app:tabIndicatorColor="@color/accent_dark"
             />
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

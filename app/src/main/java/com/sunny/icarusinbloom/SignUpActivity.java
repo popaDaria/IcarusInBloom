@@ -1,18 +1,25 @@
 package com.sunny.icarusinbloom;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sunny.icarusinbloom.login.User;
 import com.sunny.icarusinbloom.login.UserViewModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -39,16 +46,24 @@ public class SignUpActivity extends AppCompatActivity {
         EditText lastName = findViewById(R.id.userLastNameEdit);
         EditText bday = findViewById(R.id.userBdayEdit);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
-
-     /*   userViewModel.getAllUsers().observe(this,users->{
-            if(!users.isEmpty()){
-                for (User u:users) {
-                    System.out.println(u.toString());
-                }
+        DatePickerDialog.OnDateSetListener dateSetListener =
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        userBday = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
+                        bday.setText(userBday);
+                    }
+                };
+        bday.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(SignUpActivity.this,dateSetListener, 1970,1,1).show();
             }
-        });*/
+        });
+
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         button.setOnClickListener(v->{
             if(!email.getText().toString().isEmpty())
@@ -59,8 +74,8 @@ public class SignUpActivity extends AppCompatActivity {
                 userFirstName=firstName.getText().toString();
             if(!lastName.getText().toString().isEmpty())
                 userLastName=lastName.getText().toString();
-            if(!bday.getText().toString().isEmpty())
-                userBday=bday.getText().toString();
+            /*if(!bday.getText().toString().isEmpty())
+                userBday=bday.getText().toString();*/
 
             if(!userPassword.equals("null") && !userEmail.equals("null")) {
                 userViewModel.getAllUsers().observe(this,users->{

@@ -17,7 +17,7 @@
 
     <ListPreference
         app:key="gender"
-        app:title="Select gender preference for profile photo"
+        app:title="Select preferred profile photo"
         android:entries="@array/Gender"
         android:entryValues="@array/GenderData"
         />
