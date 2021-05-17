@@ -35,17 +35,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.otaliastudios.cameraview.BitmapCallback;
 import com.otaliastudios.cameraview.CameraListener;
 import com.otaliastudios.cameraview.CameraView;
 import com.otaliastudios.cameraview.FileCallback;
 import com.otaliastudios.cameraview.PictureResult;
 import com.squareup.picasso.Picasso;
+import com.sunny.icarusinbloom.diary.DiaryItem;
+import com.sunny.icarusinbloom.diary.DiaryItemAdapter;
+import com.sunny.icarusinbloom.diary.DiaryItemViewModel;
 import com.sunny.icarusinbloom.model.CapturePhotoUtils;
+import com.sunny.icarusinbloom.recycler.PlantItem;
+import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
+import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,106 +69,74 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 
 //SurfaceHolder.Callback, Handler.Callback
-public class Fragment3 extends Fragment {
+public class Fragment3 extends Fragment implements DiaryItemAdapter.OnListItemClick2 {
 
     View rootView;
-    Button photoBtn;
-    ImageView imageView;
-    ImageView refresh;
-    private static final int TAKE_IMAGE = 133;
-    CameraView cameraView;
-
-    String currentPhotoPath;
-    File photoFile = null;
-
-    private File createImageFile() {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = null;
-        try {
-            image = File.createTempFile(
-                    imageFileName,  /* prefix */
-                    ".jpg",         /* suffix */
-                    storageDir      /* directory */
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        cameraView = rootView.findViewById(R.id.cameraView);
-        cameraView.setLifecycleOwner(getViewLifecycleOwner());
-
-        cameraView.addCameraListener(new CameraListener() {
-            @Override
-            public void onPictureTaken(@NonNull PictureResult result) {
-                System.out.println("picture taken");
-                result.toBitmap(new BitmapCallback() {
-                    @Override
-                    public void onBitmapReady(@Nullable Bitmap bitmap) {
-                       // imageView.setImageBitmap(bitmap);
-
-
-                        /*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                        String imageFileName = "JPEG_" + timeStamp + "_";
-                        CapturePhotoUtils.insertImage(getContext().getContentResolver(),bitmap,imageFileName,"InBloom_diary");*/
-                    }
-                });
-
-                photoFile = createImageFile();
-                result.toFile(photoFile, new FileCallback() {
-                    @Override
-                    public void onFileReady(@Nullable File file) {
-                        if (photoFile != null) {
-                            Uri photoURI = FileProvider.getUriForFile(getContext(),
-                                    "com.example.android.fileprovider",
-                                    photoFile);
-                            System.out.println(photoURI.toString());
-                            Picasso.get().load(photoURI).rotate(90)
-                                    .centerCrop().fit().into(imageView);
-                            imageView.setVisibility(View.VISIBLE);
-                            cameraView.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
-            }
-        });
-    }
-
+    RecyclerView recyclerView;
+    DiaryItemViewModel viewModel;
+    List<DiaryItem> list = new ArrayList<>();
+    DiaryItemAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment3,container,false);
 
-        photoBtn = rootView.findViewById(R.id.takePhoto);
-        imageView = rootView.findViewById(R.id.takenImageView);
-        refresh = rootView.findViewById(R.id.refreshImage);
-        photoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cameraView.takePicture();
-            }
-        });
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView.setVisibility(View.INVISIBLE);
-                cameraView.setVisibility(View.VISIBLE);
-            }
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewDiary);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        viewModel = new ViewModelProvider(this).get(DiaryItemViewModel.class);
+
+        updateList();
+        adapter = new DiaryItemAdapter(list,this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        FloatingActionButton fab = rootView.findViewById(R.id.fab_add_diary);
+        fab.setOnClickListener(v -> {
+            presentActivity(v);
         });
 
         return rootView;
     }
 
+    public void presentActivity(View view){
+        int revealX = (int) (view.getX() + view.getWidth() /2);
+        int revealY = (int) (view.getY() + view.getHeight() /2);
 
+        Intent intent = new Intent(getContext(), AddDiaryEntry.class);
+        intent.putExtra(AddDiaryEntry.EXTRA_CIRCULAR_REVEAL_X,revealX);
+        intent.putExtra(AddDiaryEntry.EXTRA_CIRCULAR_REVEAL_Y,revealY);
+        intent.putExtra("loggedUser",MainActivity.loggedUser);
+
+        startActivityForResult(intent,12);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==12){
+            if(resultCode==RESULT_OK){
+                Bundle bundle = data.getExtras();
+                DiaryItem diaryItem = (DiaryItem) bundle.getSerializable("entryAdded");
+                viewModel.insert(diaryItem);
+                updateList();
+            }
+        }
+    }
+
+    private void updateList(){
+        viewModel.getAllDiaryEntriesForUSer(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),entries ->{
+            if(entries!=null){
+                list=entries;
+                adapter.setPlants(list);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    public void onClick(DiaryItem diaryItem) {
+        viewModel.delete(diaryItem);
+        updateList();
+    }
 }
