@@ -37,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-
         TextView button = findViewById(R.id.saveChangesSignUp);
 
         EditText email = findViewById(R.id.userEmailEdit);
@@ -50,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        userBday = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
+                        userBday = String.format("%02d/%02d/%02d",dayOfMonth,month+1,year);
                         bday.setText(userBday);
                     }
                 };
@@ -58,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SignUpActivity.this,dateSetListener, 1970,1,1).show();
+                new DatePickerDialog(SignUpActivity.this,dateSetListener, 1990,0,1).show();
             }
         });
 
@@ -87,6 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
                 if(uniqueEmail) {
+                    System.out.println("BDAYYYY "+userBday);
                     User user = new User(userFirstName, userLastName, userPassword, userEmail, userBday, "other","true");
                     userViewModel.insert(user);
 

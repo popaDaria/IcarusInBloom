@@ -107,7 +107,7 @@ public class AddActivity extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        plantBday = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
+                        plantBday = String.format("%02d/%02d/%02d",dayOfMonth,month+1,year);
                         bday.setText(plantBday);
                     }
                 };
@@ -125,7 +125,7 @@ public class AddActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(AddActivity.this,dateSetListener, year,month,day).show();
+                new DatePickerDialog(AddActivity.this,dateSetListener, year,month-1,day).show();
             }
         });
 
@@ -188,7 +188,7 @@ public class AddActivity extends AppCompatActivity {
             float finalRadius = (float) (Math.max(rootLayout.getWidth(),rootLayout.getHeight()) *1.1);
 
             Animator circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout,x,y,0,finalRadius);
-            circularReveal.setDuration(400);
+            circularReveal.setDuration(310);
             circularReveal.setInterpolator(new AccelerateInterpolator());
 
             rootLayout.setVisibility(View.VISIBLE);

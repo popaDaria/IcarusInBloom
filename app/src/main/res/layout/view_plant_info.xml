@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    android:paddingHorizontal="45dp"
+    android:paddingHorizontal="40dp"
     android:paddingVertical="140dp"
     android:id="@+id/frameLayout"
     android:onClick="exitView"

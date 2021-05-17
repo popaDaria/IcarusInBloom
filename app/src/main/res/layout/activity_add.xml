@@ -60,7 +60,7 @@
         <EditText
             android:id="@+id/plantNameEdit"
             android:layout_width="227dp"
-            android:layout_height="43dp"
+            android:layout_height="41dp"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="32dp"
             android:ems="10"
@@ -141,7 +141,7 @@
         <EditText
             android:id="@+id/plantSpeciesEdit"
             android:layout_width="159dp"
-            android:layout_height="43dp"
+            android:layout_height="41dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="38dp"
             android:ems="10"
@@ -154,7 +154,7 @@
         <EditText
             android:id="@+id/plantInfoEdit"
             android:layout_width="227dp"
-            android:layout_height="43dp"
+            android:layout_height="41dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:ems="10"
@@ -252,8 +252,8 @@
         <EditText
             android:id="@+id/plantBdayEdit"
             android:layout_width="227dp"
-            android:layout_height="43dp"
-            android:layout_marginTop="14dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="32dp"
             android:ems="10"
             android:inputType="date"

@@ -37,4 +37,5 @@
     <string name="back">Back</string>
     <string name="no_plants_yet">No plants yet</string>
     <string name="no_info_yet">No info yet</string>
+    <string name="take_photo">Take Photo</string>
 </resources>
