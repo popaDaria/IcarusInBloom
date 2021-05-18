@@ -12,7 +12,7 @@
         android:id="@+id/cameraView"
         android:layout_width="300dp"
         android:layout_height="350dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:visibility="invisible"
         android:layout_width="300dp"
         android:layout_height="350dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,9 +46,10 @@
         android:id="@+id/refreshImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="432dp"
         android:layout_marginEnd="288dp"
-        android:src="@drawable/sad_plant1"
+        android:src="@drawable/refresh"
+        android:background="@drawable/round_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,11 +57,12 @@
         android:id="@+id/saveEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="@string/add"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/button_bg"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
