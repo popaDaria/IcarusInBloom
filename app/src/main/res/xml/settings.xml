@@ -17,9 +17,13 @@
 
     <ListPreference
         app:key="gender"
-        app:title="Select preferred profile photo"
+        app:title="Change profile photo"
         android:entries="@array/Gender"
         android:entryValues="@array/GenderData"
         />
 
+    <EditTextPreference
+        app:key="name"
+        app:title="Change account name"
+        />
     </PreferenceScreen>

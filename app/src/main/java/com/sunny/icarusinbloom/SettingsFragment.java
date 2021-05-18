@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -21,6 +22,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.settings,rootKey);
+
+        Preference name = findPreference("name");
+        name.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String newName = newValue.toString();
+                MainActivity.loggedUser.setFirstName(newName);
+                userViewModel.update(MainActivity.loggedUser);
+                return true;
+            }
+        });
 
         Preference feedback= findPreference("feedback");
         feedback.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

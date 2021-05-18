@@ -65,6 +65,10 @@ public class MainActivity extends AppCompatActivity{
                 Picasso.get().load(R.drawable.other_icon).centerCrop().fit().into(userPic);
                 break;
         }
+
+        TextView titleHeader= findViewById(R.id.title_header);
+        String newTitle = "Hello, "+loggedUser.getFirstName()+" c:";
+        titleHeader.setText(newTitle);
     }
 
     @Override
