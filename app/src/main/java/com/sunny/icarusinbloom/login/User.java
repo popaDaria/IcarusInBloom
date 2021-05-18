@@ -12,17 +12,15 @@ public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String password;
     private String email;
     private String bday;
     private String photoPref;
     private String mailPref;
 
-    public User(String firstName, String lastName, String password, String email, String bday, String photoPref, String mailPref) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String name, String password, String email, String bday, String photoPref, String mailPref) {
+        this.name = name;
         this.password = password;
         this.email = email;
         this.bday = bday;
@@ -34,8 +32,7 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", firstName='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", bday='" + bday + '\'' +
@@ -84,20 +81,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBday() {

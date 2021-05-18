@@ -26,7 +26,6 @@ public class SignUpActivity extends AppCompatActivity {
     String userEmail = "null";
     String userPassword = "null";
     String userFirstName = "null";
-    String userLastName = "null";
     String userBday = "null";
     boolean uniqueEmail = true;
     public static User signedUpUser;
@@ -42,7 +41,6 @@ public class SignUpActivity extends AppCompatActivity {
         EditText email = findViewById(R.id.userEmailEdit);
         EditText password = findViewById(R.id.userPasswordEdit);
         EditText firstName = findViewById(R.id.userFirstNameEdit);
-        EditText lastName = findViewById(R.id.userLastNameEdit);
         EditText bday = findViewById(R.id.userBdayEdit);
 
         DatePickerDialog.OnDateSetListener dateSetListener =
@@ -71,8 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
                 userPassword=password.getText().toString();
             if(!firstName.getText().toString().isEmpty())
                 userFirstName=firstName.getText().toString();
-            if(!lastName.getText().toString().isEmpty())
-                userLastName=lastName.getText().toString();
+
             /*if(!bday.getText().toString().isEmpty())
                 userBday=bday.getText().toString();*/
 
@@ -87,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                 });
                 if(uniqueEmail) {
                     System.out.println("BDAYYYY "+userBday);
-                    User user = new User(userFirstName, userLastName, userPassword, userEmail, userBday, "other","true");
+                    User user = new User(userFirstName, userPassword, userEmail, userBday, "other","true");
                     userViewModel.insert(user);
 
                     userViewModel.getAllUsers().observe(this,users->{

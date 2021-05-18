@@ -28,7 +28,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 String newName = newValue.toString();
-                MainActivity.loggedUser.setFirstName(newName);
+                MainActivity.loggedUser.setName(newName);
                 userViewModel.update(MainActivity.loggedUser);
                 return true;
             }

@@ -18,7 +18,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="415dp"
-        android:layout_height="508dp"
+        android:layout_height="450dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="0dp"
@@ -107,29 +107,13 @@
             android:shadowColor="@color/accent_dark"
             android:shadowDx="3"
             android:shadowRadius="2"
-            android:text="@string/first_name"
+            android:text="@string/name"
             android:background="@drawable/border_rectangle"
             android:textAllCaps="true"
             android:textColor="@color/accent_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userPassword" />
 
-        <TextView
-            android:id="@+id/userLast"
-            android:layout_width="92dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:shadowColor="@color/accent_dark"
-            android:shadowDx="3"
-            android:shadowRadius="2"
-            android:text="@string/last_name"
-            android:background="@drawable/border_rectangle"
-            android:textAllCaps="true"
-            android:textColor="@color/accent_dark"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userFirst" />
 
         <EditText
             android:id="@+id/userFirstNameEdit"
@@ -157,55 +141,43 @@
             app:layout_constraintStart_toEndOf="@+id/userPassword"
             app:layout_constraintTop_toBottomOf="@+id/userEmailEdit" />
 
+
         <TextView
             android:id="@+id/saveChangesSignUp"
             android:layout_width="120dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="22dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/button_bg"
             android:gravity="center"
-            android:text="@string/sign_up"
-            android:textColor="@color/accent_dark"
-            android:textSize="15sp"
             android:shadowColor="@color/accent_dark"
             android:shadowDx="1"
             android:shadowRadius="1"
+            android:text="@string/sign_up"
+            android:textColor="@color/accent_dark"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.889"
+            app:layout_constraintHorizontal_bias="0.89"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/saveChangesGoToLogIn"
             android:layout_width="120dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="22dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/button_bg"
             android:gravity="center"
-            android:text="@string/go_to_log_in"
             android:onClick="goToLogIn"
-            android:textColor="@color/accent_dark"
-            android:textSize="15sp"
             android:shadowColor="@color/accent_dark"
             android:shadowDx="1"
             android:shadowRadius="1"
+            android:text="@string/go_to_log_in"
+            android:textColor="@color/accent_dark"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.109"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/userLastNameEdit"
-            android:layout_width="227dp"
-            android:layout_height="43dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/userLast"
-            app:layout_constraintTop_toBottomOf="@+id/userFirstNameEdit" />
 
         <TextView
             android:id="@+id/userBday"
@@ -222,7 +194,7 @@
             android:textAllCaps="true"
             android:textColor="@color/accent_dark"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userLast" />
+            app:layout_constraintTop_toBottomOf="@+id/userFirst" />
 
         <EditText
             android:id="@+id/userBdayEdit"
@@ -239,7 +211,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/userBday"
-            app:layout_constraintTop_toBottomOf="@+id/userLastNameEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/userFirstNameEdit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

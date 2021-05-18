@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity{
         }
 
         TextView titleHeader= findViewById(R.id.title_header);
-        String newTitle = "Hello, "+loggedUser.getFirstName()+" c:";
+        String newTitle = "Hello, "+loggedUser.getName()+" c:";
         titleHeader.setText(newTitle);
     }
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity{
             loggedUser = SignUpActivity.signedUpUser;
         }
 
-        String newTitle = "Hello, "+loggedUser.getFirstName()+" c:";
+        String newTitle = "Hello, "+loggedUser.getName()+" c:";
         titleHeader.setText(newTitle);
         ImageView userPic = findViewById(R.id.userImage);
         switch (loggedUser.getPhotoPref()){
