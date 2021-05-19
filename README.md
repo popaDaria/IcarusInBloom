@@ -43,3 +43,30 @@ Android project - Organizational app for plant owners
  
  11. As a user, I want to answer other peoples' comments from the message board, so that I can actively contribute to the group of plant owners
  12. As a user, I want to get daily advices for the type of plants that I have
+
+
+  ## _FULFILLED REQUIREMENTS_
+  
+  ###### MUST have
+
+ 1. Completed
+ 2. Completed
+ 3. Completed
+ 4. Completed
+ 5. Changed implementation - now appears with the watering part - Completed
+ 
+ ###### SHOULD have
+ 
+ 6. Completed
+ 7. Completed - picture and name
+ 
+ ###### COULD have
+ 
+ 8. Completed - general notification to checkup on plant
+ 9. Changed implementation - made a general color scheme for both modes, accent colors for dark mode are different though
+ 10. Changed implementation - third tab now became a diary with posibility to take in app pictures
+ 
+ ###### WON'T have
+ 
+ 11. Changed implementation - see requirement no. 10
+ 12. Not implemented
