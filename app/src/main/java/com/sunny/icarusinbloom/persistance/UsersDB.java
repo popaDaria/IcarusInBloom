@@ -7,7 +7,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.sunny.icarusinbloom.login.User;
-import com.sunny.icarusinbloom.recycler.PlantItem;
 
 @Database(entities = {User.class}, version = 8)
 public abstract class UsersDB extends RoomDatabase {

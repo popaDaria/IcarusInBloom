@@ -1,23 +1,18 @@
-package com.sunny.icarusinbloom.notif;
+package com.sunny.icarusinbloom.notifications;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.sunny.icarusinbloom.LogInActivity;
-import com.sunny.icarusinbloom.MainActivity;
 import com.sunny.icarusinbloom.R;
-
-import static android.provider.Settings.System.getString;
 
 public class AlarmReceiver extends BroadcastReceiver {
     private static String CHANNEL_ID ="1";

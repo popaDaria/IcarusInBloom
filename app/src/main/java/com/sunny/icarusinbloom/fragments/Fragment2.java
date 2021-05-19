@@ -1,4 +1,4 @@
-package com.sunny.icarusinbloom;
+package com.sunny.icarusinbloom.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,11 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.sunny.icarusinbloom.recycler.PlantItem;
-import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
-import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
-import com.sunny.icarusinbloom.recycler.SpeciesViewModel;
-import com.sunny.icarusinbloom.recycler.WateringItemAdapter;
+import com.sunny.icarusinbloom.MainActivity;
+import com.sunny.icarusinbloom.R;
+import com.sunny.icarusinbloom.recycler_elem.PlantItem;
+import com.sunny.icarusinbloom.recycler_elem.PlantItemViewModel;
+import com.sunny.icarusinbloom.recycler_elem.SpeciesViewModel;
+import com.sunny.icarusinbloom.recycler_elem.WateringItemAdapter;
 import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
 import java.text.SimpleDateFormat;
@@ -63,7 +64,7 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
             waterAll();
         });
 
-        viewModel.getAllPlantsByWatered(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
+        viewModel.getAllPlantsByWatered(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(), plants->{
             if(plants!=null){
                /* for (PlantItem p:plants) {
                     System.out.println(p.toString());

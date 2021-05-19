@@ -2,7 +2,6 @@ package com.sunny.icarusinbloom;
 
 import android.animation.Animator;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,21 +13,20 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 
-import com.otaliastudios.cameraview.BitmapCallback;
 import com.otaliastudios.cameraview.CameraListener;
 import com.otaliastudios.cameraview.CameraView;
 import com.otaliastudios.cameraview.FileCallback;
 import com.otaliastudios.cameraview.PictureResult;
 import com.squareup.picasso.Picasso;
-import com.sunny.icarusinbloom.diary.DiaryItem;
+import com.sunny.icarusinbloom.recycler_elem.DiaryItem;
 import com.sunny.icarusinbloom.login.User;
 
 import java.io.File;
@@ -36,10 +34,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddDiaryEntry extends AppCompatActivity {
+public class AddDiaryEntryActivity extends AppCompatActivity {
 
     Button photoBtn;
     ImageView imageView;
+    CardView cardView;
     ImageView refresh;
     CameraView cameraView;
 
@@ -61,7 +60,6 @@ public class AddDiaryEntry extends AppCompatActivity {
     private EditText contentView;
 
     private File createImageFile() {
-        // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -145,6 +143,7 @@ public class AddDiaryEntry extends AppCompatActivity {
 
         photoBtn = findViewById(R.id.takePhoto);
         imageView = findViewById(R.id.takenImageView);
+        cardView = findViewById(R.id.diaryCardView);
         refresh = findViewById(R.id.refreshImage);
         photoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +154,7 @@ public class AddDiaryEntry extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.setVisibility(View.INVISIBLE);
+                cardView.setVisibility(View.INVISIBLE);
                 cameraView.setVisibility(View.VISIBLE);
             }
         });
@@ -163,8 +162,6 @@ public class AddDiaryEntry extends AppCompatActivity {
         cameraView.addCameraListener(new CameraListener() {
             @Override
             public void onPictureTaken(@NonNull PictureResult result) {
-                System.out.println("picture taken");
-
                 photoFile = createImageFile();
                 result.toFile(photoFile, new FileCallback() {
                     @Override
@@ -175,7 +172,7 @@ public class AddDiaryEntry extends AppCompatActivity {
                                     photoFile);
                             imageUri=photoURI.toString();
                             Picasso.get().load(photoURI).rotate(90).centerCrop().fit().into(imageView);
-                            imageView.setVisibility(View.VISIBLE);
+                            cardView.setVisibility(View.VISIBLE);
                             cameraView.setVisibility(View.INVISIBLE);
                         }
                     }

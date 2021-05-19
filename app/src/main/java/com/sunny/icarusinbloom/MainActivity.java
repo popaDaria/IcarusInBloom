@@ -21,7 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.login.User;
-import com.sunny.icarusinbloom.notif.AlarmReceiver;
+import com.sunny.icarusinbloom.notifications.AlarmReceiver;
 import com.sunny.icarusinbloom.tabs.SectionsPagerAdapter;
 
 import java.text.SimpleDateFormat;

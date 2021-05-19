@@ -3,11 +3,8 @@ package com.sunny.icarusinbloom.persistance;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.room.Query;
 
-import com.sunny.icarusinbloom.login.User;
-import com.sunny.icarusinbloom.recycler.PlantItem;
+import com.sunny.icarusinbloom.recycler_elem.PlantItem;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

@@ -70,9 +70,6 @@ public class SignUpActivity extends AppCompatActivity {
             if(!firstName.getText().toString().isEmpty())
                 userFirstName=firstName.getText().toString();
 
-            /*if(!bday.getText().toString().isEmpty())
-                userBday=bday.getText().toString();*/
-
             if(!userPassword.equals("null") && !userEmail.equals("null")) {
                 userViewModel.getAllUsers().observe(this,users->{
                     if(!users.isEmpty()){
@@ -83,7 +80,6 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
                 if(uniqueEmail) {
-                    System.out.println("BDAYYYY "+userBday);
                     User user = new User(userFirstName, userPassword, userEmail, userBday, "other","true");
                     userViewModel.insert(user);
 
@@ -91,11 +87,9 @@ public class SignUpActivity extends AppCompatActivity {
                         if(!users.isEmpty()){
                             for (User u:users) {
                                 if(u.getEmail().equals(user.getEmail())){
-                                    // System.out.println(u.toString());
                                     signedUpUser = u;
                                     LogInActivity.loggedUser=null;
                                     Intent intent = new Intent(this, MainActivity.class);
-                                    //intent.putExtra("NewLoggedUser", user);
                                     startActivity(intent);
                                     break;
                                 }

@@ -40,18 +40,18 @@
             android:launchMode="singleTop"/>
         <activity android:name=".SettingsActivity"
             android:theme="@style/AppTheme"/>
-        <activity android:name=".AddDiaryEntry"
+        <activity android:name=".AddDiaryEntryActivity"
             android:theme="@style/AppTheme"/>
 
 
-        <receiver android:name=".notif.AlarmReceiver">
+        <receiver android:name=".notifications.AlarmReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
         <!-- Will not be called unless the application explicitly enables it -->
-        <receiver android:name=".notif.DeviceBootReceiver"
+        <receiver android:name=".notifications.DeviceBootReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>

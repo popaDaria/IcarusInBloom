@@ -1,4 +1,4 @@
-package com.sunny.icarusinbloom;
+package com.sunny.icarusinbloom.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +11,8 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.sunny.icarusinbloom.MainActivity;
+import com.sunny.icarusinbloom.R;
 import com.sunny.icarusinbloom.login.UserViewModel;
 
 public class SettingsFragment extends PreferenceFragmentCompat {

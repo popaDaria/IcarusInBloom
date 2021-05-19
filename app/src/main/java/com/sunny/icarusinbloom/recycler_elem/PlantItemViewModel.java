@@ -1,15 +1,12 @@
-package com.sunny.icarusinbloom.recycler;
+package com.sunny.icarusinbloom.recycler_elem;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.sunny.icarusinbloom.persistance.PlantRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlantItemViewModel extends AndroidViewModel {

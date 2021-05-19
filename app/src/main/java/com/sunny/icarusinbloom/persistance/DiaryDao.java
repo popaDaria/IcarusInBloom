@@ -7,8 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.sunny.icarusinbloom.diary.DiaryItem;
-import com.sunny.icarusinbloom.recycler.PlantItem;
+import com.sunny.icarusinbloom.recycler_elem.DiaryItem;
 
 import java.util.List;
 

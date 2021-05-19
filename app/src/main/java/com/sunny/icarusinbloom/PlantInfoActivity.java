@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
-import com.sunny.icarusinbloom.recycler.PlantItem;
+import com.sunny.icarusinbloom.recycler_elem.PlantItem;
 import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
 public class PlantInfoActivity extends AppCompatActivity {

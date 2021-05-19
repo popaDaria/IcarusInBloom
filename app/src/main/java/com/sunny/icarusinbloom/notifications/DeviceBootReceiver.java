@@ -1,4 +1,4 @@
-package com.sunny.icarusinbloom.notif;
+package com.sunny.icarusinbloom.notifications;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

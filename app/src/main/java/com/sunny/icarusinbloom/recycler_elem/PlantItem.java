@@ -1,20 +1,9 @@
-package com.sunny.icarusinbloom.recycler;
+package com.sunny.icarusinbloom.recycler_elem;
 
-import android.net.Uri;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import com.sunny.icarusinbloom.login.User;
-
 import java.io.Serializable;
-import java.net.URI;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /*
 ,foreignKeys = {

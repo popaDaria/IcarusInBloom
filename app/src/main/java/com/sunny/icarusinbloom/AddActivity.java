@@ -3,11 +3,8 @@ package com.sunny.icarusinbloom;
 import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
@@ -19,17 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.login.User;
-import com.sunny.icarusinbloom.login.UserViewModel;
-import com.sunny.icarusinbloom.recycler.PlantItem;
+import com.sunny.icarusinbloom.recycler_elem.PlantItem;
 import com.sunny.icarusinbloom.webservice.PlantApi;
 import com.sunny.icarusinbloom.webservice.ServiceGenerator;
 import com.sunny.icarusinbloom.webservice.SpeciesInfo;
@@ -37,7 +30,6 @@ import com.sunny.icarusinbloom.webservice.SpeciesResponse;
 import com.sunny.icarusinbloom.webservice.SpeciesSearchResponse;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;

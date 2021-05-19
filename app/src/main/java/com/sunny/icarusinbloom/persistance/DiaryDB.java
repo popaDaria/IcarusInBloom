@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.sunny.icarusinbloom.diary.DiaryItem;
+import com.sunny.icarusinbloom.recycler_elem.DiaryItem;
 
 @Database(entities = {DiaryItem.class},version = 1)
 public abstract class DiaryDB extends RoomDatabase {

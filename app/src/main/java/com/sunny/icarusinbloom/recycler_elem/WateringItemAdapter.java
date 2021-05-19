@@ -1,4 +1,4 @@
-package com.sunny.icarusinbloom.recycler;
+package com.sunny.icarusinbloom.recycler_elem;
 
 import android.net.Uri;
 import android.view.LayoutInflater;

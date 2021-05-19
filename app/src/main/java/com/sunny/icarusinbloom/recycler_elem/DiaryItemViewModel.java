@@ -1,4 +1,4 @@
-package com.sunny.icarusinbloom.diary;
+package com.sunny.icarusinbloom.recycler_elem;
 
 import android.app.Application;
 
@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.sunny.icarusinbloom.persistance.DiaryRepository;
-import com.sunny.icarusinbloom.persistance.PlantRepository;
 
 import java.util.List;
 

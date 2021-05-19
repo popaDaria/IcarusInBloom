@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.sunny.icarusinbloom.Fragment1;
-import com.sunny.icarusinbloom.Fragment2;
-import com.sunny.icarusinbloom.Fragment3;
+import com.sunny.icarusinbloom.fragments.Fragment1;
+import com.sunny.icarusinbloom.fragments.Fragment2;
+import com.sunny.icarusinbloom.fragments.Fragment3;
 import com.sunny.icarusinbloom.R;
 
 /**

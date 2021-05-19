@@ -1,43 +1,17 @@
-package com.sunny.icarusinbloom;
+package com.sunny.icarusinbloom.fragments;
 
-import android.Manifest;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCaptureSession;
-import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.params.SessionConfiguration;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Surface;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -45,25 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.otaliastudios.cameraview.BitmapCallback;
-import com.otaliastudios.cameraview.CameraListener;
-import com.otaliastudios.cameraview.CameraView;
-import com.otaliastudios.cameraview.FileCallback;
-import com.otaliastudios.cameraview.PictureResult;
-import com.squareup.picasso.Picasso;
-import com.sunny.icarusinbloom.diary.DiaryItem;
-import com.sunny.icarusinbloom.diary.DiaryItemAdapter;
-import com.sunny.icarusinbloom.diary.DiaryItemViewModel;
-import com.sunny.icarusinbloom.model.CapturePhotoUtils;
-import com.sunny.icarusinbloom.recycler.PlantItem;
-import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
-import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
+import com.sunny.icarusinbloom.AddDiaryEntryActivity;
+import com.sunny.icarusinbloom.MainActivity;
+import com.sunny.icarusinbloom.R;
+import com.sunny.icarusinbloom.recycler_elem.DiaryItem;
+import com.sunny.icarusinbloom.recycler_elem.DiaryItemAdapter;
+import com.sunny.icarusinbloom.recycler_elem.DiaryItemViewModel;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -77,6 +40,9 @@ public class Fragment3 extends Fragment implements DiaryItemAdapter.OnListItemCl
     List<DiaryItem> list = new ArrayList<>();
     DiaryItemAdapter adapter;
 
+    ImageView noDiary;
+    TextView noDiaryText;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,6 +51,9 @@ public class Fragment3 extends Fragment implements DiaryItemAdapter.OnListItemCl
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewDiary);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewModel = new ViewModelProvider(this).get(DiaryItemViewModel.class);
+
+        noDiary = rootView.findViewById(R.id.noDiaryImage);
+        noDiaryText = rootView.findViewById(R.id.noDiaryText);
 
         updateList();
         adapter = new DiaryItemAdapter(list,this);
@@ -100,15 +69,17 @@ public class Fragment3 extends Fragment implements DiaryItemAdapter.OnListItemCl
     }
 
     public void presentActivity(View view){
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view,"transition");
         int revealX = (int) (view.getX() + view.getWidth() /2);
         int revealY = (int) (view.getY() + view.getHeight() /2);
 
-        Intent intent = new Intent(getContext(), AddDiaryEntry.class);
-        intent.putExtra(AddDiaryEntry.EXTRA_CIRCULAR_REVEAL_X,revealX);
-        intent.putExtra(AddDiaryEntry.EXTRA_CIRCULAR_REVEAL_Y,revealY);
-        intent.putExtra("loggedUser",MainActivity.loggedUser);
+        Intent intent = new Intent(getContext(), AddDiaryEntryActivity.class);
+        intent.putExtra(AddDiaryEntryActivity.EXTRA_CIRCULAR_REVEAL_X,revealX);
+        intent.putExtra(AddDiaryEntryActivity.EXTRA_CIRCULAR_REVEAL_Y,revealY);
+        intent.putExtra("loggedUser", MainActivity.loggedUser);
 
-        startActivityForResult(intent,12);
+        ActivityCompat.startActivityForResult(getActivity(),intent,12,options.toBundle());
+        //startActivityForResult(intent,12);
     }
 
     @Override
@@ -130,6 +101,16 @@ public class Fragment3 extends Fragment implements DiaryItemAdapter.OnListItemCl
                 list=entries;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
+                if(entries.size()==0){
+                    noDiary.setVisibility(View.VISIBLE);
+                    noDiaryText.setVisibility(View.VISIBLE);
+                }else{
+                    noDiary.setVisibility(View.INVISIBLE);
+                    noDiaryText.setVisibility(View.INVISIBLE);
+                }
+            }else{
+                noDiary.setVisibility(View.VISIBLE);
+                noDiaryText.setVisibility(View.VISIBLE);
             }
         });
     }

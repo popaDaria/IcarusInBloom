@@ -1,4 +1,4 @@
-package com.sunny.icarusinbloom.recycler;
+package com.sunny.icarusinbloom.recycler_elem;
 
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -11,12 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
-import com.sunny.icarusinbloom.MainActivity;
 import com.sunny.icarusinbloom.R;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

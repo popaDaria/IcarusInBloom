@@ -1,10 +1,9 @@
-package com.sunny.icarusinbloom.diary;
+package com.sunny.icarusinbloom.recycler_elem;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.sql.Struct;
 
 @Entity(tableName = "DiaryEntries")
 public class DiaryItem implements Serializable {

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/diaryAddParent"
-    tools:context=".AddDiaryEntry">
+    tools:context=".AddDiaryEntryActivity">
 
 
     <com.otaliastudios.cameraview.CameraView
@@ -20,16 +20,26 @@
         />
 
 
-    <ImageView
-        android:id="@+id/takenImageView"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/diaryCardView"
         android:visibility="invisible"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/takenImageView"
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            tools:srcCompat="@tools:sample/avatars"
+            android:background="@color/baby_blue"/>
+    </androidx.cardview.widget.CardView>
+
 
     <Button
         android:id="@+id/takePhoto"

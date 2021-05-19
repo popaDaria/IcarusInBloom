@@ -1,46 +1,36 @@
-package com.sunny.icarusinbloom;
+package com.sunny.icarusinbloom.fragments;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
-import com.sunny.icarusinbloom.login.User;
-import com.sunny.icarusinbloom.login.UserViewModel;
-import com.sunny.icarusinbloom.recycler.PlantItem;
-import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
-import com.sunny.icarusinbloom.recycler.PlantItemViewModel;
-import com.sunny.icarusinbloom.recycler.SpeciesViewModel;
+import com.sunny.icarusinbloom.AddActivity;
+import com.sunny.icarusinbloom.MainActivity;
+import com.sunny.icarusinbloom.PlantInfoActivity;
+import com.sunny.icarusinbloom.R;
+import com.sunny.icarusinbloom.recycler_elem.PlantItem;
+import com.sunny.icarusinbloom.recycler_elem.PlantItemAdapter;
+import com.sunny.icarusinbloom.recycler_elem.PlantItemViewModel;
+import com.sunny.icarusinbloom.recycler_elem.SpeciesViewModel;
 import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import pl.droidsonroids.gif.GifImageView;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -61,10 +51,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment1,container,false);
-
-        /*int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        container.setSystemUiVisibility(uiOptions);*/
-
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewModel = new ViewModelProvider(this).get(PlantItemViewModel.class);
@@ -74,11 +60,8 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         noPlantText = rootView.findViewById(R.id.noPlantsText);
         setNoPlantViewOff();
 
-        viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
+        viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(), plants->{
             if(plants!=null){
-                for (PlantItem p:plants) {
-                    //System.out.println(p.toString());
-                }
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
@@ -98,8 +81,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
 
         FloatingActionButton fab = rootView.findViewById(R.id.fab_add);
         fab.setOnClickListener(v -> {
-            /*Intent intent = new Intent(getContext(), AddActivity.class);
-            startActivityForResult(intent, 1);*/
             presentActivity(v);
         });
 
@@ -125,7 +106,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         intent.putExtra(AddActivity.EXTRA_CIRCULAR_REVEAL_Y,revealY);
         intent.putExtra("loggedUser",MainActivity.loggedUser);
 
-        //ActivityCompat.startActivity(getContext(),intent,options.toBundle());
         //ActivityCompat.startActivityForResult(getActivity(),intent,1,options.toBundle());
         startActivityForResult(intent,1);
     }
@@ -159,9 +139,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                         System.out.println("already existing species info in table");
                     }
                 }
-                /*Toast toast = Toast.makeText(getContext(),"info received:"+ added.toString(),Toast.LENGTH_LONG);
-                toast.show();*/
-                //adapter.notifyDataSetChanged();
             }
         }else if(requestCode==3){
             if(resultCode==RESULT_OK){
@@ -180,9 +157,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         }
         viewModel.getAllUserPlant(MainActivity.loggedUser.getId()).observe(this,plants->{
             if(plants != null){
-               /* for (PlantItem p:plants) {
-                    System.out.println("HIIII "+p.toString());
-                }*/
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
@@ -199,8 +173,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     SpeciesInfo speciesInfo;
     @Override
     public void onClick(PlantItem plantItem) {
-      /*  Toast toast = Toast.makeText(getActivity(),"hi "+plantItem.toString(),Toast.LENGTH_SHORT);
-        toast.show();*/
         Intent intent = new Intent(getContext(), PlantInfoActivity.class);
         intent.putExtra("plant", plantItem);
         if(plantItem.getSpeciesId()!=-1) {
@@ -216,7 +188,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         }else{
             startActivityForResult(intent,3);
         }
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
 }

@@ -1,7 +1,6 @@
-package com.sunny.icarusinbloom.diary;
+package com.sunny.icarusinbloom.recycler_elem;
 
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.sunny.icarusinbloom.R;
-import com.sunny.icarusinbloom.recycler.PlantItem;
-import com.sunny.icarusinbloom.recycler.PlantItemAdapter;
 
 import java.util.List;
 

@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.sunny.icarusinbloom.recycler.PlantItem;
 import com.sunny.icarusinbloom.webservice.SpeciesInfo;
 
 import java.util.List;
