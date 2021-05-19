@@ -10,7 +10,6 @@ import com.sunny.icarusinbloom.login.UserViewModel;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    UserViewModel userViewModel;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

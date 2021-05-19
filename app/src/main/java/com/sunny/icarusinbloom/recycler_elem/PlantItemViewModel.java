@@ -12,7 +12,6 @@ import java.util.List;
 public class PlantItemViewModel extends AndroidViewModel {
 
     private final PlantRepository repository;
-    //private MutableLiveData<List<PlantItem>> plantList ;
 
     public PlantItemViewModel(Application application){
             super(application);

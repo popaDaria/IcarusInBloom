@@ -50,7 +50,6 @@ public class PlantItemAdapter extends RecyclerView.Adapter<PlantItemAdapter.View
             holder.photo.setImageResource(R.drawable.plant);
         }
         else {
-            //holder.photo.setImageURI(Uri.parse(plants.get(position).getImage()));
             Picasso.get().load(Uri.parse(plants.get(position).getImage())).centerCrop().fit().into(holder.photo);
         }
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");

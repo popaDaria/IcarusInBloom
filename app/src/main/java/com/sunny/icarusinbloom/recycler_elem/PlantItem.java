@@ -5,14 +5,6 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-/*
-,foreignKeys = {
-        @ForeignKey(entity = User.class,
-                parentColumns = "id",
-                childColumns = "ownerId",
-                onDelete = ForeignKey.CASCADE,
-                onUpdate = ForeignKey.CASCADE)}
- */
 @Entity(tableName = "Plants")
 public class PlantItem implements Serializable {
 

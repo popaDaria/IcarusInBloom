@@ -41,8 +41,6 @@ public class LogInActivity extends AppCompatActivity {
         if(userEmail!=null&&userPassword!=null){
             email.setText(userEmail);
             password.setText(userPassword);
-            //View view = findViewById(R.id.logInMainLayout);
-            //login(view);
         }
     }
 
@@ -69,18 +67,14 @@ public class LogInActivity extends AppCompatActivity {
             userPassword=password.getText().toString();
 
         if(userEmail!=null&&userPassword!=null){
-            //List<User> users = userViewModel.getAllUsers().getValue();
-
             userViewModel.getAllUsers().observe(this, users->{
             if(!users.isEmpty()) {
                 boolean found = false;
                 for (User u : users) {
                     if (u.getEmail().equals(userEmail) && u.getPassword().equals(userPassword)) {
-                        //System.out.println(u.toString());
                         found=true;
                         loggedUser=u;
                         Intent intent = new Intent(this, MainActivity.class);
-                        //intent.putExtra("LoggedUser", u);
                         startActivity(intent);
                         break;
                     }

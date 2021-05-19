@@ -55,7 +55,6 @@ public class PlantInfoActivity extends AppCompatActivity {
         String extraDesc = "\bEXTRA INFO:\b\n"+"\u2022 WATERING TYPE: "+plant.getWater_type()+ "\n\u2022 WATERING INTERVAL: every "+plant.getWater_interval()+" days \n";
         if (speciesInfo != null) {
             extraDesc += "\u2022 "+speciesInfo.getScientificName();
-            //System.out.println(extraDesc);
             if (speciesInfo.isEdible()) {
                 extraDesc += ", EDIBLE \n";
             } else extraDesc += ", NOT EDIBLE \n";
@@ -69,7 +68,6 @@ public class PlantInfoActivity extends AppCompatActivity {
                 extraDesc += "\u2022 LIKED SOIL NUTRIMENTS LVL: "+speciesInfo.getSoilLevel()+"/10";
         }
         extra.setText(extraDesc);
-
 
         backButton.setOnClickListener(v->{
             finish();

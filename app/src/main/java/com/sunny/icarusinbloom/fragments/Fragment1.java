@@ -38,7 +38,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
 
     PlantItemViewModel viewModel;
     SpeciesViewModel speciesViewModel;
-    //UserViewModel viewModel1;
     List<PlantItem> list = new ArrayList<>();
     PlantItemAdapter adapter;
     View rootView;
@@ -75,7 +74,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         });
 
         adapter = new PlantItemAdapter(list,this);
-
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -97,7 +95,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
     }
 
     public void presentActivity(View view){
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view,"transition");
         int revealX = (int) (view.getX() + view.getWidth() /2);
         int revealY = (int) (view.getY() + view.getHeight() /2);
 
@@ -106,7 +103,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
         intent.putExtra(AddActivity.EXTRA_CIRCULAR_REVEAL_Y,revealY);
         intent.putExtra("loggedUser",MainActivity.loggedUser);
 
-        //ActivityCompat.startActivityForResult(getActivity(),intent,1,options.toBundle());
         startActivityForResult(intent,1);
     }
 
@@ -134,7 +130,6 @@ public class Fragment1 extends Fragment implements PlantItemAdapter.OnListItemCl
                     });
                     if(!found) {
                         speciesViewModel.insert(speciesAdded);
-                        System.out.println("inserting species info into table");
                     }else{
                         System.out.println("already existing species info in table");
                     }

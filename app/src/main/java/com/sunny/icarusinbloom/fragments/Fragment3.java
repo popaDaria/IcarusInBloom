@@ -31,7 +31,6 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-//SurfaceHolder.Callback, Handler.Callback
 public class Fragment3 extends Fragment implements DiaryItemAdapter.OnListItemClick2 {
 
     View rootView;
@@ -78,8 +77,8 @@ public class Fragment3 extends Fragment implements DiaryItemAdapter.OnListItemCl
         intent.putExtra(AddDiaryEntryActivity.EXTRA_CIRCULAR_REVEAL_Y,revealY);
         intent.putExtra("loggedUser", MainActivity.loggedUser);
 
-        ActivityCompat.startActivityForResult(getActivity(),intent,12,options.toBundle());
-        //startActivityForResult(intent,12);
+        //ActivityCompat.startActivityForResult(getActivity(),intent,12,options.toBundle());
+        startActivityForResult(intent,12);
     }
 
     @Override

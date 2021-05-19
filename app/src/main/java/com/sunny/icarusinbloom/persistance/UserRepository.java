@@ -13,8 +13,6 @@ import java.util.concurrent.Executors;
 public class UserRepository {
     private static UserRepository instance;
     private final UserDao userDao;
-    //private final LiveData<User> loggedInUser;
-    //private int loggedUserId;
     private final ExecutorService executorService;
 
     private UserRepository(Application application){
@@ -38,7 +36,6 @@ public class UserRepository {
     public LiveData<Integer> getUserId(String email){
         return userDao.getUserId(email);
     }
-
     public void update(User user){
         executorService.execute(()->userDao.update(user));
     }

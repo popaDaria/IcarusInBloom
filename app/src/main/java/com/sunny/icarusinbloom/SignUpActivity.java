@@ -29,7 +29,6 @@ public class SignUpActivity extends AppCompatActivity {
     String userBday = "null";
     boolean uniqueEmail = true;
     public static User signedUpUser;
-
     private UserViewModel userViewModel;
 
     @Override

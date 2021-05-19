@@ -53,7 +53,6 @@ public class AddActivity extends AppCompatActivity {
     private int revealX;
     private int revealY;
     private User user;
-    //private int userId;
     PlantItem toAdd;
     SpeciesInfo speciesInfo;
     TextView button;
@@ -63,8 +62,6 @@ public class AddActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-
-       // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         final Intent intent1 = getIntent();
         rootLayout = findViewById(R.id.mainAddLayout);
@@ -135,7 +132,6 @@ public class AddActivity extends AppCompatActivity {
             intent.setType("image/*");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-           // intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(intent,2);
         });
 
@@ -146,9 +142,6 @@ public class AddActivity extends AppCompatActivity {
                 plantName=name.getText().toString();
             if(!species.getText().toString().isEmpty())
                 plantSpecies=species.getText().toString();
-            /*if(!bday.getText().toString().isEmpty()){
-                plantBday=bday.getText().toString();
-            }*/
 
             if(plantName.equals("null")|| plantSpecies.equals("null")) {
                 Toast toast = Toast.makeText(this, "please input a name & species", Toast.LENGTH_SHORT);
@@ -156,21 +149,14 @@ public class AddActivity extends AppCompatActivity {
             }else {
                 setSpecies(rootLayout);
                 toAdd = new PlantItem(plantName, plantInfo, plantSpecies, plantUri, plantBday,user.getId(),speciesId,water_interval,water_type,"no record");
-                //Toast toast = Toast.makeText(this,"USER ID:"+ userId,Toast.LENGTH_LONG);
-                //toast.show();
-                System.out.println(toAdd.toString());
                 Intent intent = new Intent();
                 intent.putExtra("plantAdded", toAdd);
                 if(speciesInfo!=null){
-                    System.out.println("ADDING SPECIES INFO");
                     intent.putExtra("speciesAdded",speciesInfo);
                 }
                 setResult(RESULT_OK, intent);
             }
             finish();
-
-            /*Toast toast = Toast.makeText(this,"info sent:"+ toAdd.toString(),Toast.LENGTH_LONG);
-            toast.show();*/
         });
     }
 
@@ -178,11 +164,9 @@ public class AddActivity extends AppCompatActivity {
     protected void revealActivity(int x,int y){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
             float finalRadius = (float) (Math.max(rootLayout.getWidth(),rootLayout.getHeight()) *1.1);
-
             Animator circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout,x,y,0,finalRadius);
             circularReveal.setDuration(310);
             circularReveal.setInterpolator(new AccelerateInterpolator());
-
             rootLayout.setVisibility(View.VISIBLE);
             circularReveal.start();
         }else {
@@ -208,7 +192,6 @@ public class AddActivity extends AppCompatActivity {
         EditText species = findViewById(R.id.plantSpeciesEdit);
         if(!species.getText().toString().isEmpty()) {
             plantSpecies = species.getText().toString();
-            System.out.println("TYPED SPECIES");
         }
 
         String token = "De-v8aTD7o019T5P3T_ReGeB27zMkNdmb9rga5EhGCQ";
@@ -258,7 +241,6 @@ public class AddActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<SpeciesResponse> call, Throwable t) {
                     //nothing
-                    System.out.println("GETTING INFO FAILURE");
                 }
             });
         }else{

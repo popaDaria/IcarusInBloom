@@ -66,9 +66,6 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
 
         viewModel.getAllPlantsByWatered(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(), plants->{
             if(plants!=null){
-               /* for (PlantItem p:plants) {
-                    System.out.println(p.toString());
-                }*/
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();
@@ -131,9 +128,6 @@ public class Fragment2 extends Fragment implements WateringItemAdapter.OnListIte
     private void updateList(){
         viewModel.getAllPlantsByWatered(MainActivity.loggedUser.getId()).observe(getViewLifecycleOwner(),plants->{
             if(plants!=null){
-                for (PlantItem p:plants) {
-                    System.out.println(p.toString());
-                }
                 list=plants;
                 adapter.setPlants(list);
                 adapter.notifyDataSetChanged();

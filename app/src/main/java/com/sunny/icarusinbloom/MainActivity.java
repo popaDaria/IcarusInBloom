@@ -33,8 +33,6 @@ import pl.droidsonroids.gif.GifImageView;
 public class MainActivity extends AppCompatActivity{
 
     public static User loggedUser;
-    //private UserViewModel userViewModel;
-    //User user;
     private PendingIntent pendingIntent;
     boolean showGif = false;
 
@@ -76,9 +74,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* View thisView = findViewById(R.id.mainActivityLayout);
-        thisView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);*/
-
         TextView titleHeader= findViewById(R.id.title_header);
 
         loggedUser = LogInActivity.loggedUser;
@@ -100,8 +95,6 @@ public class MainActivity extends AppCompatActivity{
                 Picasso.get().load(R.drawable.other_icon).centerCrop().fit().into(userPic);
                 break;
         }
-
-       // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -137,7 +130,6 @@ public class MainActivity extends AppCompatActivity{
                 }
             },4000);
         }
-        //System.out.println(loggedUser.toString());
     }
 
     @Override
@@ -167,13 +159,6 @@ public class MainActivity extends AppCompatActivity{
         int interval = 1000 * 60 * 60 * 6;
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
         Log.e("Alarm","started");
-        //Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
-    }
-
-    public void cancel() {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        manager.cancel(pendingIntent);
-        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
     }
 
     public void startAt8() {

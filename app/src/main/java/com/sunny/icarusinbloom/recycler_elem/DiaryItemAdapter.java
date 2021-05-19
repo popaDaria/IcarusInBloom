@@ -48,7 +48,6 @@ public class DiaryItemAdapter extends RecyclerView.Adapter<DiaryItemAdapter.View
             holder.photo.setImageResource(R.drawable.plant);
         }
         else {
-            //holder.photo.setImageURI(Uri.parse(plants.get(position).getImage()));
             Picasso.get().load(Uri.parse(itemList.get(position).getImage())).centerCrop().rotate(90).fit().into(holder.photo);
         }
 
