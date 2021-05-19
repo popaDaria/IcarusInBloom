@@ -53,7 +53,7 @@ Android project - Organizational app for plant owners
  2. Completed
  3. Completed
  4. Completed
- 5. Changed implementation - now appears with the watering part - Completed
+ 5. Changed implementation - now appears with the watering part 
  
  ###### SHOULD have
  
@@ -63,10 +63,16 @@ Android project - Organizational app for plant owners
  ###### COULD have
  
  8. Completed - general notification to checkup on plant
- 9. Changed implementation - made a general color scheme for both modes, accent colors for dark mode are different though
+ 9. Changed implementation - general color scheme for both, darker accent colors for dark mode
  10. Changed implementation - third tab now became a diary with posibility to take in app pictures
  
  ###### WON'T have
  
  11. Changed implementation - see requirement no. 10
  12. Not implemented
+
+ ###### EXTRA
+ - More settings options (mail, feedback)
+ - Plants and users birthday fields and messages
+ - "No plants yet" messages
+ - The diary page with internal photo storage
