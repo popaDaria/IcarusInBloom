@@ -1,6 +1,10 @@
 # IcarusInBloom
 Android project - Organizational app for plant owners
 
+# Link
+
+[Video link](https://www.youtube.com/watch?v=IShH96uEUXM "presentation video")
+
 ## _DESCRIPTION_
 
 ![Flowmap](flowmap.png "Flowmap")
